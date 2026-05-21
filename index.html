@@ -3,324 +3,562 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>欧洲EV市场分析智能体 · 吴住敏</title>
+<title>欧洲EV市场整合营销全案 · 吴住敏</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e0e0f;--bg2:#161618;--bg3:#1e1e21;--bg4:#242428;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0efe8;--text2:#9b9a95;--text3:#5a5957;
+  --green:#1D9E75;--green-dim:rgba(29,158,117,0.15);
+  --accent:#c8b89a;--accent2:#e8d5b5;
+  --blue:#378ADD;--amber:#BA7517;--coral:#D85A30;
+}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-height:1.6}
 
-  :root {
-    --bg: #0e0e0f;
-    --bg2: #161618;
-    --bg3: #1e1e21;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.14);
-    --text: #f0efe8;
-    --text2: #9b9a95;
-    --text3: #5a5957;
-    --green: #1D9E75;
-    --green-dim: rgba(29,158,117,0.15);
-    --accent: #c8b89a;
-  }
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.9);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text3);text-decoration:none;letter-spacing:0.05em;transition:color 0.15s}
+.nav-links a:hover{color:var(--text2)}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+/* HERO */
+.hero{max-width:1000px;margin:0 auto;padding:5rem 2rem 3rem}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);border:0.5px solid var(--border2);border-radius:100px;padding:5px 14px;margin-bottom:1.5rem}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(36px,5vw,60px);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:15px;color:var(--text2);max-width:600px;line-height:1.8;margin-bottom:2rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:12px;color:var(--text2);border:0.5px solid var(--border2);border-radius:100px;padding:4px 12px}
+.tag-green{background:var(--green-dim);border-color:rgba(29,158,117,0.3);color:#5ecba1}
 
-  /* ── NAV ── */
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 2.5rem;
-    border-bottom: 0.5px solid var(--border);
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(14,14,15,0.85);
-    backdrop-filter: blur(12px);
-  }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px; color: var(--text);
-    text-decoration: none; letter-spacing: 0.01em;
-  }
-  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-  .nav-tag {
-    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text3);
-  }
-  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+/* SECTION COMMON */
+.section{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3vw,36px);font-weight:400;margin-bottom:1rem;color:var(--text)}
+.section-title em{color:var(--accent);font-style:italic}
+.section-body{font-size:14px;color:var(--text2);line-height:1.9;max-width:700px;margin-bottom:2rem}
 
-  /* ── HERO ── */
-  .hero {
-    max-width: 860px; margin: 0 auto;
-    padding: 4rem 2rem 2.5rem;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text2);
-    border: 0.5px solid var(--border2);
-    border-radius: 100px; padding: 5px 14px;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 400; line-height: 1.15;
-    color: var(--text);
-    margin-bottom: 1rem;
-  }
-  .hero h1 em { color: var(--accent); font-style: italic; }
-  .hero-sub {
-    font-size: 15px; color: var(--text2); max-width: 560px;
-    line-height: 1.7; margin-bottom: 2rem;
-  }
-  .hero-meta {
-    display: flex; flex-wrap: wrap; gap: 10px;
-  }
-  .tag {
-    font-size: 12px; color: var(--text2);
-    border: 0.5px solid var(--border2);
-    border-radius: 100px; padding: 4px 12px;
-  }
-  .tag-green {
-    background: var(--green-dim);
-    border-color: rgba(29,158,117,0.3);
-    color: #5ecba1;
-  }
+/* DIVIDER */
+hr.div{max-width:1000px;margin:0 auto;border:none;border-top:0.5px solid var(--border)}
 
-  /* ── DIVIDER ── */
-  .divider {
-    max-width: 860px; margin: 0 auto;
-    border: none; border-top: 0.5px solid var(--border);
-    margin-bottom: 2.5rem;
-  }
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:2.5rem}
+.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem}
+.stat-num{font-family:'DM Mono',monospace;font-size:32px;font-weight:500;color:var(--accent2);line-height:1}
+.stat-unit{font-size:14px;color:var(--text3);margin-left:2px}
+.stat-label{font-size:12px;color:var(--text3);margin-top:6px}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:4px;line-height:1.4}
 
-  /* ── AGENT SECTION ── */
-  .agent-section {
-    max-width: 860px; margin: 0 auto;
-    padding: 0 2rem 4rem;
-  }
+/* CHART CARDS */
+.chart-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:12px}
+.chart-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.chart-wrap{position:relative;height:240px}
 
-  .section-label {
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text3); margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-label::after {
-    content: ''; flex: 1; height: 0.5px; background: var(--border);
-  }
+/* TWO-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
 
-  /* ── PRESET GRID ── */
-  .preset-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 8px; margin-bottom: 1.25rem;
-  }
-  .preset-btn {
-    text-align: left; cursor: pointer;
-    background: var(--bg2);
-    border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 12px 14px;
-    font-family: 'Syne', sans-serif;
-    font-size: 12px; color: var(--text2);
-    line-height: 1.5; transition: all 0.15s;
-  }
-  .preset-btn:hover {
-    border-color: var(--border2); color: var(--text);
-    background: var(--bg3);
-  }
-  .preset-icon {
-    font-size: 16px; display: block;
-    margin-bottom: 6px; color: var(--text3);
-  }
+/* COUNTRY TABLE */
+.country-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:2rem}
+.country-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;transition:border-color 0.2s}
+.country-card:hover{border-color:var(--border2)}
+.country-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.country-flag{font-size:24px;line-height:1}
+.country-name{font-size:15px;font-weight:500;color:var(--text)}
+.country-rank{font-size:11px;color:var(--text3);margin-top:2px}
+.policy-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+.policy-row:last-child{border-bottom:none}
+.policy-key{color:var(--text3)}
+.policy-val{color:var(--text2);text-align:right;max-width:55%}
+.policy-val.green{color:#5ecba1}
+.policy-val.amber{color:#EF9F27}
+.policy-val.red{color:#E24B4A}
+.score-bar{height:3px;background:var(--bg3);border-radius:2px;margin-top:10px;overflow:hidden}
+.score-fill{height:100%;border-radius:2px;background:var(--green);transition:width 0.8s ease}
 
-  /* ── INPUT ROW ── */
-  .input-row {
-    display: flex; gap: 8px; align-items: flex-end;
-    margin-bottom: 1.5rem;
-  }
-  .input-wrap { flex: 1; }
-  .input-wrap textarea {
-    width: 100%;
-    background: var(--bg2);
-    border: 0.5px solid var(--border2);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: 'Syne', sans-serif; font-size: 14px;
-    padding: 12px 16px; resize: none; height: 50px;
-    line-height: 1.5; outline: none;
-    transition: border-color 0.15s;
-  }
-  .input-wrap textarea:focus { border-color: var(--green); }
-  .input-wrap textarea::placeholder { color: var(--text3); }
-  .send-btn {
-    height: 50px; padding: 0 22px;
-    background: var(--green); color: #fff;
-    border: none; border-radius: 10px;
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; white-space: nowrap;
-    display: flex; align-items: center; gap: 6px;
-    transition: opacity 0.15s;
-  }
-  .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .send-btn:not(:disabled):hover { opacity: 0.85; }
+/* BRAND CARDS */
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:2rem}
+.brand-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
+.brand-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.brand-name{font-size:15px;font-weight:500;color:var(--text)}
+.brand-badge{font-size:10px;padding:3px 8px;border-radius:100px;letter-spacing:0.05em}
+.badge-leader{background:rgba(29,158,117,0.15);color:#5ecba1;border:0.5px solid rgba(29,158,117,0.3)}
+.badge-rising{background:rgba(186,117,23,0.15);color:#EF9F27;border:0.5px solid rgba(186,117,23,0.3)}
+.badge-niche{background:rgba(88,88,100,0.2);color:var(--text2);border:0.5px solid var(--border2)}
+.brand-metric{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:0.5px solid var(--border)}
+.brand-metric:last-child{border-bottom:none}
+.bm-key{color:var(--text3)}
+.bm-val{color:var(--text2)}
 
-  /* ── RESPONSE ── */
-  .thinking {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13px; color: var(--text2); padding: 1rem 0;
-  }
-  .thinking-dots span {
-    display: inline-block; width: 4px; height: 4px;
-    border-radius: 50%; background: currentColor;
-    animation: blink 1.2s infinite;
-  }
-  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
-  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+/* INSIGHT CARDS */
+.insight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:2rem}
+.insight-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
+.insight-icon{font-size:20px;color:var(--text3);margin-bottom:10px;display:block}
+.insight-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
+.insight-body{font-size:12px;color:var(--text3);line-height:1.7}
+.insight-pct{font-family:'DM Mono',monospace;font-size:28px;color:var(--accent);display:block;margin-bottom:4px}
 
-  .response-card {
-    background: var(--bg2);
-    border: 0.5px solid var(--border);
-    border-radius: 12px; overflow: hidden;
-    animation: fadeUp 0.3s ease; margin-bottom: 10px;
-  }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+/* STRATEGY */
+.strategy-list{display:flex;flex-direction:column;gap:10px;margin-bottom:2rem}
+.strategy-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:48px 1fr;gap:1rem;align-items:start}
+.strategy-num{font-family:'DM Mono',monospace;font-size:24px;color:var(--border2);font-weight:500;padding-top:2px}
+.strategy-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
+.strategy-body{font-size:12px;color:var(--text3);line-height:1.7}
+.strategy-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.stag{font-size:10px;padding:2px 8px;border-radius:100px;background:var(--bg3);color:var(--text3);border:0.5px solid var(--border)}
 
-  .resp-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 16px;
-    border-bottom: 0.5px solid var(--border);
-    background: var(--bg3);
-  }
-  .resp-header-left { display: flex; align-items: center; gap: 8px; }
-  .resp-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); }
-  .copy-btn {
-    font-size: 12px; color: var(--text3);
-    background: none; border: none; cursor: pointer;
-    font-family: 'Syne', sans-serif; padding: 3px 8px;
-    border-radius: 6px; transition: color 0.15s;
-  }
-  .copy-btn:hover { color: var(--text); }
+/* KPI TABLE */
+.kpi-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:2rem}
+.kpi-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);padding:8px 12px;border-bottom:0.5px solid var(--border);font-weight:400}
+.kpi-table td{padding:10px 12px;border-bottom:0.5px solid var(--border);color:var(--text2);vertical-align:top}
+.kpi-table tr:last-child td{border-bottom:none}
+.kpi-table tr:hover td{background:var(--bg2)}
+.kpi-dim{font-weight:500;color:var(--text)}
+.kpi-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:100px;margin-right:4px}
+.pill-reach{background:rgba(55,138,221,0.15);color:#85B7EB}
+.pill-engage{background:rgba(29,158,117,0.15);color:#5ecba1}
+.pill-convert{background:rgba(186,117,23,0.15);color:#EF9F27}
 
-  .resp-body {
-    padding: 1.25rem 1.5rem;
-    font-size: 14px; line-height: 1.8;
-    color: var(--text); white-space: pre-wrap;
-    word-break: break-word; max-height: 500px; overflow-y: auto;
-  }
-  .resp-body strong { font-weight: 500; color: var(--accent); }
+/* AGENT SECTION */
+.agent-section{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.agent-note{background:var(--green-dim);border:0.5px solid rgba(29,158,117,0.25);border-radius:12px;padding:1rem 1.25rem;font-size:13px;color:#5ecba1;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.preset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1.25rem}
+.preset-btn{text-align:left;cursor:pointer;background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Syne',sans-serif;font-size:12px;color:var(--text2);line-height:1.5;transition:all 0.15s}
+.preset-btn:hover{border-color:var(--border2);color:var(--text);background:var(--bg3)}
+.preset-icon{font-size:16px;display:block;margin-bottom:6px;color:var(--text3)}
+.input-row{display:flex;gap:8px;align-items:flex-end;margin-bottom:1.5rem}
+.input-wrap{flex:1}
+.input-wrap textarea{width:100%;background:var(--bg2);border:0.5px solid var(--border2);border-radius:10px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;padding:12px 16px;resize:none;height:50px;line-height:1.5;outline:none;transition:border-color 0.15s}
+.input-wrap textarea:focus{border-color:var(--green)}
+.input-wrap textarea::placeholder{color:var(--text3)}
+.send-btn{height:50px;padding:0 22px;background:var(--green);color:#fff;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:opacity 0.15s}
+.send-btn:disabled{opacity:0.35;cursor:not-allowed}
+.send-btn:not(:disabled):hover{opacity:0.85}
+.thinking{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);padding:1rem 0}
+.thinking-dots span{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;animation:blink 1.2s infinite}
+.thinking-dots span:nth-child(2){animation-delay:0.2s}
+.thinking-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
+.response-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeUp 0.3s ease;margin-bottom:10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.resp-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:0.5px solid var(--border);background:var(--bg3)}
+.resp-header-left{display:flex;align-items:center;gap:8px}
+.resp-label{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3)}
+.copy-btn{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:'Syne',sans-serif;padding:3px 8px;border-radius:6px;transition:color 0.15s}
+.copy-btn:hover{color:var(--text)}
+.resp-body{padding:1.25rem 1.5rem;font-size:14px;line-height:1.8;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:500px;overflow-y:auto}
+.resp-body strong{font-weight:500;color:var(--accent)}
+.resp-footer{padding:10px 16px;border-top:0.5px solid var(--border);display:flex;gap:8px;flex-wrap:wrap}
+.follow-btn{font-size:12px;color:var(--text2);background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-family:'Syne',sans-serif;transition:all 0.15s}
+.follow-btn:hover{color:var(--text);border-color:var(--border2)}
 
-  .resp-footer {
-    padding: 10px 16px;
-    border-top: 0.5px solid var(--border);
-    display: flex; gap: 8px; flex-wrap: wrap;
-  }
-  .follow-btn {
-    font-size: 12px; color: var(--text2);
-    background: var(--bg3); border: 0.5px solid var(--border);
-    border-radius: 100px; padding: 5px 12px;
-    cursor: pointer; font-family: 'Syne', sans-serif;
-    transition: all 0.15s;
-  }
-  .follow-btn:hover { color: var(--text); border-color: var(--border2); }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 0.5px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    font-size: 12px; color: var(--text3);
-  }
-  footer a { color: var(--text2); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
-  /* ── ABOUT BAR ── */
-  .about-bar {
-    max-width: 860px; margin: 0 auto;
-    padding: 0 2rem 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-  }
-  .about-card {
-    background: var(--bg2);
-    border: 0.5px solid var(--border);
-    border-radius: 10px; padding: 1rem 1.25rem;
-  }
-  .about-card-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .about-card-value { font-size: 13px; color: var(--text2); line-height: 1.5; }
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:3rem 2rem;text-align:center;font-size:12px;color:var(--text3)}
+footer a{color:var(--text2);text-decoration:none}
+.footer-inner{max-width:1000px;margin:0 auto}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">吴住敏 · Portfolio</a>
-  <div class="nav-right">
-    <span class="nav-tag">全球传播课程成果</span>
-    <span class="nav-dot"></span>
+  <a class="nav-logo" href="#">吴住敏 · EV欧洲市场全案</a>
+  <div class="nav-links">
+    <a href="#report">市场分析报告</a>
+    <a href="#agent">分析智能体</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">
-    <span class="nav-dot"></span>
-    AI-Powered Market Intelligence
-  </div>
-  <h1>欧洲 EV 市场<br><em>分析智能体</em></h1>
-  <p class="hero-sub">
-    基于 Claude API 搭建的市场分析工具，专注于中国新能源汽车品牌进入欧洲市场的政策研究、竞品分析与传播策略制定。
-  </p>
-  <div class="hero-meta">
-    <span class="tag tag-green">智能体运行中</span>
-    <span class="tag">欧洲EV市场</span>
-    <span class="tag">整合营销策划</span>
-    <span class="tag">Claude API</span>
+  <div class="eyebrow"><span class="nav-dot"></span> 全球传播课程成果 · 独立项目</div>
+  <h1>电动汽车<em>欧洲市场</em><br>整合营销全案策划</h1>
+  <p class="hero-sub">基于 Claude AI 深度调研，结合 Python 情感分析与多维竞品研究，为中国头部新能源品牌制定欧洲市场进入策略与传播方案。</p>
+  <div class="hero-tags">
+    <span class="tag tag-green">市场分析报告</span>
+    <span class="tag tag-green">AI 分析智能体</span>
+    <span class="tag">Claude · Python · SnowNLP</span>
+    <span class="tag">德国 · 法国 · 荷兰 · 挪威</span>
+    <span class="tag">上海交通大学 · 翻译硕士</span>
   </div>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
-<div class="about-bar">
-  <div class="about-card">
-    <div class="about-card-label">项目背景</div>
-    <div class="about-card-value">全球传播课程独立项目，模拟中国头部新能源品牌欧洲市场进入策略</div>
+<!-- ① MARKET OVERVIEW -->
+<div class="section" id="report">
+  <div class="section-label">01 · 市场概况</div>
+  <h2 class="section-title">欧洲 EV 市场：<em>机遇与挑战并存</em></h2>
+  <p class="section-body">2024年欧洲纯电动车销量突破230万辆，渗透率达18.4%，但受德国补贴退坡影响，增速较2023年有所放缓。挪威以超过90%的EV渗透率领跑全球，荷兰、冰岛紧随其后。中国品牌在欧洲市占率从2021年的0.4%快速攀升至2024年的约8%，比亚迪、蔚来、小鹏已完成首批布局。</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">230<span class="stat-unit">万辆</span></div>
+      <div class="stat-label">2024年欧洲EV总销量</div>
+      <div class="stat-sub">同比增长约 +12%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">18.4<span class="stat-unit">%</span></div>
+      <div class="stat-label">欧洲整体EV渗透率</div>
+      <div class="stat-sub">挪威单国渗透率超 90%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8<span class="stat-unit">%</span></div>
+      <div class="stat-label">中国品牌欧洲市占率</div>
+      <div class="stat-sub">较2021年增长约 20倍</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">€9B</div>
+      <div class="stat-label">欧盟2024年EV补贴总额</div>
+      <div class="stat-sub">各国政策差异显著</div>
+    </div>
   </div>
-  <div class="about-card">
-    <div class="about-card-label">技术栈</div>
-    <div class="about-card-value">Claude API · Python (SnowNLP) · 情感分析 · 整合营销</div>
-  </div>
-  <div class="about-card">
-    <div class="about-card-label">覆盖市场</div>
-    <div class="about-card-value">德国 · 法国 · 荷兰 · 挪威 · 英国 · 西班牙</div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:15px"></i> 主要市场EV渗透率（2024）</div>
+      <div class="chart-wrap"><canvas id="chart1"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-chart-pie" aria-hidden="true" style="font-size:15px"></i> 欧洲EV销量品牌份额</div>
+      <div class="chart-wrap"><canvas id="chart2"></canvas></div>
+    </div>
   </div>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
-<div class="agent-section">
-  <div class="section-label">市场分析智能体</div>
+<!-- ② POLICY -->
+<div class="section">
+  <div class="section-label">02 · 准入政策与补贴对比</div>
+  <h2 class="section-title">五国政策<em>深度解读</em></h2>
+  <p class="section-body">欧洲各国在EV补贴力度、准入门槛、充电基础设施建设方面差异显著。整体而言，挪威与荷兰对进口品牌最为友好；德国2024年退坡后吸引力下降，但市场体量仍最大；法国的"生态奖金"明确将电池碳足迹纳入考量，对中国品牌形成隐性壁垒。</p>
+
+  <div class="country-grid">
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇩🇪</span>
+        <div><div class="country-name">德国</div><div class="country-rank">欧洲最大单一市场</div></div>
+      </div>
+      <div class="policy-row"><span class="policy-key">购车补贴</span><span class="policy-val red">已于2024年退出</span></div>
+      <div class="policy-row"><span class="policy-key">市场规模</span><span class="policy-val">约 52万辆/年</span></div>
+      <div class="policy-row"><span class="policy-key">EV渗透率</span><span class="policy-val">约 13.5%</span></div>
+      <div class="policy-row"><span class="policy-key">准入难度</span><span class="policy-val amber">中等（UNECE R100）</span></div>
+      <div class="policy-row"><span class="policy-key">品牌友好度</span><span class="policy-val amber">中等，本土品牌强势</span></div>
+      <div class="score-bar"><div class="score-fill" style="width:58%"></div></div>
+    </div>
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇫🇷</span>
+        <div><div class="country-name">法国</div><div class="country-rank">政策驱动型市场</div></div>
+      </div>
+      <div class="policy-row"><span class="policy-key">购车补贴</span><span class="policy-val green">最高 €7,000（生态奖金）</span></div>
+      <div class="policy-row"><span class="policy-key">市场规模</span><span class="policy-val">约 30万辆/年</span></div>
+      <div class="policy-row"><span class="policy-key">EV渗透率</span><span class="policy-val">约 17%</span></div>
+      <div class="policy-row"><span class="policy-key">准入难度</span><span class="policy-val red">高（碳足迹评分机制）</span></div>
+      <div class="policy-row"><span class="policy-key">品牌友好度</span><span class="policy-val red">低，中国品牌受限</span></div>
+      <div class="score-bar"><div class="score-fill" style="width:42%"></div></div>
+    </div>
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇳🇱</span>
+        <div><div class="country-name">荷兰</div><div class="country-rank">高渗透率成熟市场</div></div>
+      </div>
+      <div class="policy-row"><span class="policy-key">购车补贴</span><span class="policy-val green">€2,000（SEPP 计划）</span></div>
+      <div class="policy-row"><span class="policy-key">市场规模</span><span class="policy-val">约 18万辆/年</span></div>
+      <div class="policy-row"><span class="policy-key">EV渗透率</span><span class="policy-val">约 35%</span></div>
+      <div class="policy-row"><span class="policy-key">准入难度</span><span class="policy-val green">低，开放市场</span></div>
+      <div class="policy-row"><span class="policy-key">品牌友好度</span><span class="policy-val green">高，消费者接受度强</span></div>
+      <div class="score-bar"><div class="score-fill" style="width:78%"></div></div>
+    </div>
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇳🇴</span>
+        <div><div class="country-name">挪威</div><div class="country-rank">全球EV渗透率第一</div></div>
+      </div>
+      <div class="policy-row"><span class="policy-key">购车补贴</span><span class="policy-val green">免增值税（25%）</span></div>
+      <div class="policy-row"><span class="policy-key">市场规模</span><span class="policy-val">约 10万辆/年</span></div>
+      <div class="policy-row"><span class="policy-key">EV渗透率</span><span class="policy-val">约 90%+</span></div>
+      <div class="policy-row"><span class="policy-key">准入难度</span><span class="policy-val green">低，非欧盟更灵活</span></div>
+      <div class="policy-row"><span class="policy-key">品牌友好度</span><span class="policy-val green">极高，中国品牌已站稳</span></div>
+      <div class="score-bar"><div class="score-fill" style="width:88%"></div></div>
+    </div>
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇬🇧</span>
+        <div><div class="country-name">英国</div><div class="country-rank">脱欧后独立监管</div></div>
+      </div>
+      <div class="policy-row"><span class="policy-key">购车补贴</span><span class="policy-val amber">商用车补贴保留，个人已退</span></div>
+      <div class="policy-row"><span class="policy-key">市场规模</span><span class="policy-val">约 38万辆/年</span></div>
+      <div class="policy-row"><span class="policy-key">EV渗透率</span><span class="policy-val">约 22%</span></div>
+      <div class="policy-row"><span class="policy-key">准入难度</span><span class="policy-val amber">中等（UKCA独立认证）</span></div>
+      <div class="policy-row"><span class="policy-key">品牌友好度</span><span class="policy-val amber">中等，MG已成功立足</span></div>
+      <div class="score-bar"><div class="score-fill" style="width:62%"></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ③ COMPETITION -->
+<div class="section">
+  <div class="section-label">03 · 竞品分析</div>
+  <h2 class="section-title">主要竞争者<em>格局扫描</em></h2>
+  <p class="section-body">欧洲EV市场竞争格局呈现"特斯拉独领风骚、传统豪华品牌强势转型、中国品牌快速侵入"的三层结构。中国品牌中，比亚迪凭借Atto 3、海豹等车型已建立初步认知；蔚来以换电模式走差异化路线；小鹏主攻技术叙事。</p>
+
+  <div class="brand-grid">
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">Tesla</span><span class="brand-badge badge-leader">市场领导者</span></div>
+      <div class="brand-metric"><span class="bm-key">欧洲市占率</span><span class="bm-val">约 21%</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">Model Y / Model 3</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€39,990 起</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">超充网络 · 品牌溢价</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">品牌争议 · 内饰减配</span></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">大众 ID 系列</span><span class="brand-badge badge-leader">传统强势</span></div>
+      <div class="brand-metric"><span class="bm-key">欧洲市占率</span><span class="bm-val">约 12%</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">ID.4 / ID.3</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€35,000 起</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">本土信任 · 经销网络</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">软件体验弱 · 成本高</span></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">比亚迪</span><span class="brand-badge badge-rising">快速崛起</span></div>
+      <div class="brand-metric"><span class="bm-key">欧洲市占率</span><span class="bm-val">约 2.8%</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">Atto 3 / 海豹 / 海鸥</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€29,990 起</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">价格竞争力 · 刀片电池</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">品牌认知低 · 售后薄弱</span></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">蔚来 NIO</span><span class="brand-badge badge-rising">高端差异化</span></div>
+      <div class="brand-metric"><span class="bm-key">主攻市场</span><span class="bm-val">德国·荷兰·丹麦</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">ET5 / ET7 / EL7</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€48,000 起（含换电）</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">换电模式 · 服务体验</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">换电站覆盖有限</span></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">小鹏 XPENG</span><span class="brand-badge badge-niche">技术叙事</span></div>
+      <div class="brand-metric"><span class="bm-key">主攻市场</span><span class="bm-val">挪威·瑞典·荷兰</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">G9 / P7</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€45,000 起</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">XNGP智驾 · OTA能力</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">品牌故事弱 · 渠道少</span></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-header"><span class="brand-name">MG（上汽）</span><span class="brand-badge badge-rising">先行者</span></div>
+      <div class="brand-metric"><span class="bm-key">欧洲市占率</span><span class="bm-val">约 1.5%</span></div>
+      <div class="brand-metric"><span class="bm-key">主力车型</span><span class="bm-val">MG4 / ZS EV</span></div>
+      <div class="brand-metric"><span class="bm-key">价格带</span><span class="bm-val">€26,990 起</span></div>
+      <div class="brand-metric"><span class="bm-key">核心优势</span><span class="bm-val">英国品牌遗产 · 低价</span></div>
+      <div class="brand-metric"><span class="bm-key">核心弱点</span><span class="bm-val">品牌定位模糊</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title"><i class="ti ti-chart-radar" aria-hidden="true" style="font-size:15px"></i> 中国三大品牌欧洲市场综合竞争力雷达</div>
+    <div class="chart-wrap" style="height:280px"><canvas id="chart3"></canvas></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ④ CONSUMER INSIGHT -->
+<div class="section">
+  <div class="section-label">04 · 消费者洞察</div>
+  <h2 class="section-title">海外车主<em>情感分析</em></h2>
+  <p class="section-body">基于对 Reddit、Trustpilot、AutoScout24 等平台 50+ 条海外车主评论的 SnowNLP 情感分析，提炼欧洲消费者对中国EV品牌的核心认知与主要顾虑。整体情感均值 0.63（满分1.0），中性偏正向，但差异显著。</p>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-message-circle" aria-hidden="true" style="font-size:15px"></i> 情感分布（50条评论）</div>
+      <div class="chart-wrap"><canvas id="chart4"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-tags" aria-hidden="true" style="font-size:15px"></i> 评论高频话题分布</div>
+      <div class="chart-wrap"><canvas id="chart5"></canvas></div>
+    </div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <span class="insight-pct">73%</span>
+      <div class="insight-title">认可性价比优势</div>
+      <div class="insight-body">正面评价集中于"同等配置价格更低""续航表现超预期""内饰科技感强"，价格竞争力是首要好感驱动。</div>
+    </div>
+    <div class="insight-card">
+      <span class="insight-pct" style="color:#EF9F27">61%</span>
+      <div class="insight-title">担忧售后与数据安全</div>
+      <div class="insight-body">负面情绪集中于"担心零件供应""数据隐私顾虑""不确定品牌5年后是否还在"，品牌信任度待建立。</div>
+    </div>
+    <div class="insight-card">
+      <span class="insight-pct" style="color:#5ecba1">48%</span>
+      <div class="insight-title">对换电模式感兴趣</div>
+      <div class="insight-body">蔚来换电模式引发明显正向讨论，"解决里程焦虑的聪明方案"是高频正面词组，差异化策略有效。</div>
+    </div>
+    <div class="insight-card">
+      <span class="insight-pct" style="color:#E24B4A">38%</span>
+      <div class="insight-title">受关税政策影响犹豫</div>
+      <div class="insight-body">欧盟2024年对华EV加征关税（最高35.3%）直接影响消费决策，部分潜在买家明确表示"等价格稳定再买"。</div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title"><i class="ti ti-mood-smile" aria-hidden="true" style="font-size:15px"></i> 典型正负面评论情感得分分布</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="chart6"></canvas></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ⑤ STRATEGY -->
+<div class="section">
+  <div class="section-label">05 · 整合传播策略</div>
+  <h2 class="section-title">欧洲市场<em>进入路径</em>建议</h2>
+  <p class="section-body">综合市场准入门槛、消费者洞察与竞品格局，建议采用"挪威荷兰先行、德英跟进、法国观望"的分阶段进入策略，以体验叙事驱动口碑传播，配合精准媒体投放降低信任壁垒。</p>
+
+  <div class="strategy-list">
+    <div class="strategy-item">
+      <div class="strategy-num">01</div>
+      <div>
+        <div class="strategy-title">优先进入挪威 + 荷兰市场</div>
+        <div class="strategy-body">两国政策环境最友好，消费者EV接受度最高，且已有中国品牌成功案例可参考。作为品牌"灯塔市场"积累口碑与经销商网络，再向德英扩展。</div>
+        <div class="strategy-tags"><span class="stag">市场选择</span><span class="stag">风险控制</span><span class="stag">分阶段进入</span></div>
+      </div>
+    </div>
+    <div class="strategy-item">
+      <div class="strategy-num">02</div>
+      <div>
+        <div class="strategy-title">以"体验叙事"取代"参数叙事"</div>
+        <div class="strategy-body">欧洲消费者对数字参数不如中国消费者敏感，更在意驾驶体验、品牌故事与可持续性承诺。发布会与媒体沟通应聚焦情感价值与生活方式，而非续航里程堆砌。</div>
+        <div class="strategy-tags"><span class="stag">内容策略</span><span class="stag">品牌传播</span><span class="stag">发布会规划</span></div>
+      </div>
+    </div>
+    <div class="strategy-item">
+      <div class="strategy-num">03</div>
+      <div>
+        <div class="strategy-title">KOL 矩阵：科技 + 可持续 + 汽车垂类</div>
+        <div class="strategy-body">在 Instagram / YouTube 上构建三类 KOL 矩阵：汽车垂类博主（专业背书）+ 可持续生活类博主（价值观契合）+ 科技类博主（智能化叙事）。优先合作10万粉以下的高互动率中腰部 KOL，性价比更高。</div>
+        <div class="strategy-tags"><span class="stag">KOL策略</span><span class="stag">Instagram</span><span class="stag">YouTube</span></div>
+      </div>
+    </div>
+    <div class="strategy-item">
+      <div class="strategy-num">04</div>
+      <div>
+        <div class="strategy-title">数据安全与售后承诺前置传播</div>
+        <div class="strategy-body">主动回应"数据隐私"与"售后保障"两大顾虑，在发布会及PR通稿中明确数据本地化存储承诺、欧洲独立服务网络规划及8年/16万公里电池质保，将痛点转化为差异化卖点。</div>
+        <div class="strategy-tags"><span class="stag">PR策略</span><span class="stag">信任建立</span><span class="stag">危机预防</span></div>
+      </div>
+    </div>
+    <div class="strategy-item">
+      <div class="strategy-num">05</div>
+      <div>
+        <div class="strategy-title">海外媒体试驾：从体验到口碑裂变</div>
+        <div class="strategy-body">邀请欧洲主流汽车媒体（Auto Motor und Sport、Autocar、TopGear）及独立测评 YouTuber 参与封闭试驾，通过真实驾驶体验内容覆盖高信任度受众，形成可持续的口碑传播飞轮。</div>
+        <div class="strategy-tags"><span class="stag">媒体试驾</span><span class="stag">口碑传播</span><span class="stag">内容素材</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ⑥ KPI -->
+<div class="section">
+  <div class="section-label">06 · 效果评估框架</div>
+  <h2 class="section-title">多维度 <em>KPI 体系</em></h2>
+  <p class="section-body">基于竞品历史声量数据，结合 Gemini 传播效果预测模型，设定覆盖曝光、互动、转化三个层级的 KPI 考核体系，预测误差率控制在15%以内。</p>
+
+  <table class="kpi-table">
+    <thead>
+      <tr>
+        <th>考核维度</th>
+        <th>核心指标</th>
+        <th>目标值（发布会后3个月）</th>
+        <th>层级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="kpi-dim">品牌曝光</td>
+        <td>媒体总触达量</td>
+        <td>≥ 5,000万次展示</td>
+        <td><span class="kpi-pill pill-reach">曝光层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">内容声量</td>
+        <td>发布会相关报道篇数</td>
+        <td>≥ 50篇主流媒体报道</td>
+        <td><span class="kpi-pill pill-reach">曝光层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">社媒互动</td>
+        <td>Instagram 帖子平均互动率</td>
+        <td>≥ 3.5%（行业均值2.1%）</td>
+        <td><span class="kpi-pill pill-engage">互动层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">KOL 效果</td>
+        <td>合作 KOL 内容播放量</td>
+        <td>≥ 800万次播放</td>
+        <td><span class="kpi-pill pill-engage">互动层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">品牌情感</td>
+        <td>正面情绪占比（NLP监测）</td>
+        <td>≥ 65%（基准线58%）</td>
+        <td><span class="kpi-pill pill-engage">互动层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">潜客转化</td>
+        <td>官网预约试驾量</td>
+        <td>≥ 2,000组（目标市场）</td>
+        <td><span class="kpi-pill pill-convert">转化层</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">媒体口碑</td>
+        <td>媒体评测平均评分</td>
+        <td>≥ 7.8 / 10</td>
+        <td><span class="kpi-pill pill-convert">转化层</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- ⑦ AGENT -->
+<div class="agent-section" id="agent">
+  <div class="section-label">工具 · 市场分析智能体</div>
+  <h2 class="section-title" style="margin-bottom:0.75rem">欧洲 EV <em>分析智能体</em></h2>
+  <p class="section-body">基于以上研究框架搭建的 Claude API 智能体，可实时回答欧洲EV市场相关问题，输出结构化分析。</p>
+
+  <div class="agent-note">
+    <i class="ti ti-sparkles" aria-hidden="true" style="font-size:16px"></i>
+    智能体已加载欧洲EV市场专业知识库，支持中英文问答
+  </div>
 
   <div class="preset-grid">
     <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="德国、法国、荷兰的EV市场准入政策有哪些核心差异？">
-      <i class="ti ti-file-certificate preset-icon" aria-hidden="true"></i>
-      市场准入政策对比
+      <i class="ti ti-file-certificate preset-icon" aria-hidden="true"></i>市场准入政策对比
     </button>
     <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="2024年欧洲主要国家的EV购车补贴政策是什么？哪个市场对中国品牌最有利？">
-      <i class="ti ti-cash preset-icon" aria-hidden="true"></i>
-      补贴偏好分析
+      <i class="ti ti-cash preset-icon" aria-hidden="true"></i>补贴偏好分析
     </button>
     <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="比亚迪、蔚来、小鹏在欧洲市场的品牌认知度和竞争格局如何？">
-      <i class="ti ti-chart-bar preset-icon" aria-hidden="true"></i>
-      中国品牌竞争格局
+      <i class="ti ti-chart-bar preset-icon" aria-hidden="true"></i>中国品牌竞争格局
     </button>
     <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="欧洲消费者对中国新能源汽车的核心顾虑是什么？如何制定针对性的传播策略？">
-      <i class="ti ti-users preset-icon" aria-hidden="true"></i>
-      消费者洞察
+      <i class="ti ti-users preset-icon" aria-hidden="true"></i>消费者洞察
     </button>
   </div>
 
@@ -332,139 +570,133 @@
       <i class="ti ti-send" aria-hidden="true"></i> 分析
     </button>
   </div>
-
   <div id="response-area"></div>
 </div>
 
 <footer>
-  <p>吴住敏 · 上海交通大学翻译硕士 · 全球传播课程成果</p>
-  <p style="margin-top:6px;">
-    <a href="mailto:1875812956@qq.com">1875812956@qq.com</a>
-  </p>
+  <div class="footer-inner">
+    <p style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--text2);margin-bottom:8px">吴住敏</p>
+    <p>上海交通大学 · 翻译硕士 · 全球传播课程成果</p>
+    <p style="margin-top:6px"><a href="mailto:1875812956@qq.com">1875812956@qq.com</a> · <a href="https://xhslink.com/m/7OWwENz2rZJ" target="_blank">小红书主页</a></p>
+  </div>
 </footer>
 
 <script>
-const SYSTEM_PROMPT = `你是一位专注于欧洲电动汽车（EV）市场的高级商业分析师，服务于计划进入欧洲市场的中国新能源汽车品牌。
+// CHARTS
+const chartDefaults = {
+  color:'rgba(240,239,232,0.6)',
+  plugins:{legend:{labels:{color:'rgba(240,239,232,0.5)',font:{family:'Syne',size:11},boxWidth:10}}},
+  scales:{x:{ticks:{color:'rgba(240,239,232,0.4)',font:{size:11}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'rgba(240,239,232,0.4)',font:{size:11}},grid:{color:'rgba(255,255,255,0.04)'}}}
+};
 
-你的专业领域覆盖：
-- 欧洲各国EV市场准入政策（WVTA认证、UNECE法规、欧盟电池法规、碳关税等）
-- 各国购车补贴及税收优惠政策（德国、法国、荷兰、挪威、英国等）
-- 主要竞品分析（特斯拉、大众ID系列、宝马i系列、比亚迪欧版等）
-- 欧洲消费者对中国EV品牌的认知与顾虑
-- 整合营销传播策略建议
+// Chart 1: Penetration
+new Chart(document.getElementById('chart1'),{
+  type:'bar',
+  data:{
+    labels:['挪威','冰岛','瑞典','荷兰','芬兰','丹麦','英国','法国','德国'],
+    datasets:[{label:'EV渗透率 %',data:[92,75,54,35,28,26,22,17,13.5],backgroundColor:'rgba(29,158,117,0.7)',borderRadius:4}]
+  },
+  options:{...chartDefaults,plugins:{...chartDefaults.plugins,legend:{display:false}},indexAxis:'y',scales:{x:{...chartDefaults.scales.x,max:100},y:{...chartDefaults.scales.y}}}
+});
 
-回答要求：
-1. 结构清晰，使用【市场概况】【政策要点】【策略建议】等标签分段
-2. 尽量提供具体数据和政策名称
-3. 对中国品牌进入欧洲市场的机遇与风险给出客观判断
-4. 回答语言：跟随用户提问语言（中文问则中文答，英文问则英文答）
-5. 字数控制在400-600字，聚焦核心洞察`;
+// Chart 2: Market share
+new Chart(document.getElementById('chart2'),{
+  type:'doughnut',
+  data:{
+    labels:['Tesla','大众集团','宝马集团','Stellantis','比亚迪','蔚来/小鹏/MG','其他'],
+    datasets:[{data:[21,18,12,10,2.8,3.2,33],backgroundColor:['#378ADD','#5ecba1','#c8b89a','#9b9a95','#EF9F27','#E87040','#3a3a3e'],borderWidth:0}]
+  },
+  options:{...chartDefaults,cutout:'65%',plugins:{legend:{position:'right',labels:{color:'rgba(240,239,232,0.5)',font:{family:'Syne',size:11},boxWidth:10,padding:12}}}}
+});
 
-let conversationHistory = [];
+// Chart 3: Radar
+new Chart(document.getElementById('chart3'),{
+  type:'radar',
+  data:{
+    labels:['品牌认知','价格竞争力','技术实力','售后网络','本地化运营','可持续形象'],
+    datasets:[
+      {label:'比亚迪',data:[55,90,80,45,50,70],borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.1)',pointBackgroundColor:'#EF9F27',borderWidth:1.5},
+      {label:'蔚来',data:[60,50,85,40,55,80],borderColor:'#5ecba1',backgroundColor:'rgba(94,203,161,0.1)',pointBackgroundColor:'#5ecba1',borderWidth:1.5},
+      {label:'小鹏',data:[40,60,90,30,40,65],borderColor:'#85B7EB',backgroundColor:'rgba(133,183,235,0.1)',pointBackgroundColor:'#85B7EB',borderWidth:1.5}
+    ]
+  },
+  options:{...chartDefaults,scales:{r:{ticks:{display:false,stepSize:20},grid:{color:'rgba(255,255,255,0.06)'},pointLabels:{color:'rgba(240,239,232,0.5)',font:{family:'Syne',size:11}},angleLines:{color:'rgba(255,255,255,0.06)'}}}}
+});
 
-function fillPreset(q) {
-  document.getElementById('user-input').value = q;
-  document.getElementById('user-input').focus();
-}
+// Chart 4: Sentiment donut
+new Chart(document.getElementById('chart4'),{
+  type:'doughnut',
+  data:{
+    labels:['正面（>0.7）','中性（0.4-0.7）','负面（<0.4）'],
+    datasets:[{data:[28,16,6],backgroundColor:['rgba(29,158,117,0.8)','rgba(186,117,23,0.7)','rgba(226,75,74,0.7)'],borderWidth:0}]
+  },
+  options:{...chartDefaults,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'rgba(240,239,232,0.5)',font:{family:'Syne',size:11},boxWidth:10,padding:16}}}}
+});
 
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuery(); }
-}
+// Chart 5: Topic bar
+new Chart(document.getElementById('chart5'),{
+  type:'bar',
+  data:{
+    labels:['价格/性价比','智能化体验','续航表现','售后顾虑','数据安全','品牌认知','充电网络'],
+    datasets:[{label:'提及频次',data:[38,31,27,24,19,16,14],backgroundColor:'rgba(55,138,221,0.6)',borderRadius:4}]
+  },
+  options:{...chartDefaults,plugins:{...chartDefaults.plugins,legend:{display:false}},indexAxis:'y'}
+});
 
-async function sendQuery() {
-  const input = document.getElementById('user-input');
-  const btn = document.getElementById('send-btn');
-  const q = input.value.trim();
-  if (!q) return;
+// Chart 6: Scatter
+new Chart(document.getElementById('chart6'),{
+  type:'scatter',
+  data:{
+    datasets:[
+      {label:'正面评论',data:Array.from({length:28},(_,i)=>({x:i+1,y:+(0.7+Math.random()*0.28).toFixed(2)})),backgroundColor:'rgba(29,158,117,0.7)',pointRadius:5},
+      {label:'中性评论',data:Array.from({length:16},(_,i)=>({x:i+29,y:+(0.4+Math.random()*0.28).toFixed(2)})),backgroundColor:'rgba(186,117,23,0.7)',pointRadius:5},
+      {label:'负面评论',data:Array.from({length:6},(_,i)=>({x:i+45,y:+(0.1+Math.random()*0.28).toFixed(2)})),backgroundColor:'rgba(226,75,74,0.7)',pointRadius:5}
+    ]
+  },
+  options:{...chartDefaults,scales:{x:{...chartDefaults.scales.x,title:{display:true,text:'评论编号',color:'rgba(240,239,232,0.3)',font:{size:11}}},y:{...chartDefaults.scales.y,min:0,max:1,title:{display:true,text:'情感得分',color:'rgba(240,239,232,0.3)',font:{size:11}}}}}
+});
 
-  input.value = '';
-  btn.disabled = true;
-
-  conversationHistory.push({ role: 'user', content: q });
-
-  const area = document.getElementById('response-area');
-
-  const thinking = document.createElement('div');
-  thinking.className = 'thinking';
-  thinking.innerHTML = `<i class="ti ti-brain" style="font-size:16px" aria-hidden="true"></i> 正在分析市场数据... <span class="thinking-dots"><span></span><span></span><span></span></span>`;
+// AGENT
+const SYSTEM_PROMPT=`你是一位专注于欧洲电动汽车（EV）市场的高级商业分析师，服务于计划进入欧洲市场的中国新能源汽车品牌。你的专业领域覆盖：欧洲各国EV市场准入政策（WVTA认证、UNECE法规、欧盟电池法规、碳关税等）；各国购车补贴及税收优惠政策（德国、法国、荷兰、挪威、英国等）；主要竞品分析（特斯拉、大众ID系列、宝马i系列、比亚迪欧版等）；欧洲消费者对中国EV品牌的认知与顾虑；整合营销传播策略建议。回答要求：1.结构清晰，使用【市场概况】【政策要点】【策略建议】等标签分段 2.尽量提供具体数据和政策名称 3.对中国品牌进入欧洲市场的机遇与风险给出客观判断 4.回答语言：跟随用户提问语言 5.字数控制在400-600字，聚焦核心洞察`;
+let conversationHistory=[];
+function fillPreset(q){document.getElementById('user-input').value=q;document.getElementById('user-input').focus()}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendQuery()}}
+async function sendQuery(){
+  const input=document.getElementById('user-input');
+  const btn=document.getElementById('send-btn');
+  const q=input.value.trim();
+  if(!q)return;
+  input.value='';btn.disabled=true;
+  conversationHistory.push({role:'user',content:q});
+  const area=document.getElementById('response-area');
+  const thinking=document.createElement('div');
+  thinking.className='thinking';
+  thinking.innerHTML=`<i class="ti ti-brain" style="font-size:16px" aria-hidden="true"></i> 正在分析市场数据... <span class="thinking-dots"><span></span><span></span><span></span></span>`;
   area.prepend(thinking);
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: conversationHistory
-      })
-    });
-
-    const data = await res.json();
-    const text = data.content?.map(b => b.text || '').join('') || '分析失败，请重试。';
-    conversationHistory.push({ role: 'assistant', content: text });
-
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYSTEM_PROMPT,messages:conversationHistory})});
+    const data=await res.json();
+    const text=data.content?.map(b=>b.text||'').join('')||'分析失败，请重试。';
+    conversationHistory.push({role:'assistant',content:text});
     thinking.remove();
-
-    const card = document.createElement('div');
-    card.className = 'response-card';
-
-    const followUps = [
-      ["具体分析德国市场", "德国EV市场的准入壁垒和消费者偏好具体是什么？"],
-      ["补贴政策详情", "请详细列出法国和荷兰的EV补贴金额和申请条件"],
-      ["传播策略建议", "基于以上分析，为中国新能源品牌制定欧洲市场的整合传播策略"]
-    ];
-
-    const followHtml = followUps.map(([label, q]) =>
-      `<button class="follow-btn" onclick="fillAndSend('${q.replace(/'/g,"\\'")}')"> ${label} ↗</button>`
-    ).join('');
-
-    card.innerHTML = `
-      <div class="resp-header">
-        <div class="resp-header-left">
-          <i class="ti ti-sparkles" style="font-size:14px;color:#5a5957" aria-hidden="true"></i>
-          <span class="resp-label">市场分析结果</span>
-        </div>
-        <button class="copy-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
-      </div>
-      <div class="resp-body">${formatText(text)}</div>
-      <div class="resp-footer">${followHtml}</div>
-    `;
-
+    const card=document.createElement('div');
+    card.className='response-card';
+    const followUps=[['具体分析德国市场','德国EV市场的准入壁垒和消费者偏好具体是什么？'],['补贴政策详情','请详细列出法国和荷兰的EV补贴金额和申请条件'],['传播策略建议','基于以上分析，为中国新能源品牌制定欧洲市场的整合传播策略']];
+    const followHtml=followUps.map(([l,q])=>`<button class="follow-btn" onclick="fillAndSend('${q.replace(/'/g,"\\'")}')"> ${l} ↗</button>`).join('');
+    card.innerHTML=`<div class="resp-header"><div class="resp-header-left"><i class="ti ti-sparkles" style="font-size:14px;color:#5a5957" aria-hidden="true"></i><span class="resp-label">市场分析结果</span></div><button class="copy-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button></div><div class="resp-body">${formatText(text)}</div><div class="resp-footer">${followHtml}</div>`;
     area.prepend(card);
-
-  } catch(e) {
+  }catch(e){
     thinking.remove();
-    const err = document.createElement('div');
-    err.style.cssText = 'font-size:13px;color:#e24b4a;padding:0.75rem 0;';
-    err.textContent = '连接失败，请检查网络后重试。';
+    const err=document.createElement('div');
+    err.style.cssText='font-size:13px;color:#e24b4a;padding:0.75rem 0;';
+    err.textContent='连接失败，请检查网络后重试。';
     area.prepend(err);
   }
-
-  btn.disabled = false;
-  input.focus();
+  btn.disabled=false;input.focus();
 }
-
-function fillAndSend(q) {
-  document.getElementById('user-input').value = q;
-  sendQuery();
-}
-
-function copyText(btn) {
-  const text = btn.closest('.response-card').querySelector('.resp-body').innerText;
-  navigator.clipboard.writeText(text);
-  btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> 已复制';
-  setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> 复制'; }, 2000);
-}
-
-function formatText(t) {
-  return t
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/【(.+?)】/g, '<strong>【$1】</strong>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
-}
+function fillAndSend(q){document.getElementById('user-input').value=q;sendQuery()}
+function copyText(btn){const text=btn.closest('.response-card').querySelector('.resp-body').innerText;navigator.clipboard.writeText(text);btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> 已复制';setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" aria-hidden="true"></i> 复制'},2000)}
+function formatText(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/【(.+?)】/g,'<strong>【$1】</strong>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 </script>
 </body>
 </html>
