@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外发布会项目SOP · 吴住敏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e0e0f;--bg2:#161618;--bg3:#1e1e21;--bg4:#242428;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0efe8;--text2:#9b9a95;--text3:#5a5957;
+  --green:#1D9E75;--green-dim:rgba(29,158,117,0.12);
+  --accent:#c8b89a;--accent2:#e8d5b5;
+  --blue:#378ADD;--amber:#EF9F27;--coral:#E87040;--purple:#7F77DD;
+}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-height:1.6}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.92);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none}
+.nav-back{font-size:12px;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.15s}
+.nav-back:hover{color:var(--text2)}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);display:inline-block}
+
+.hero{max-width:1000px;margin:0 auto;padding:4rem 2rem 2.5rem}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);border:0.5px solid var(--border2);border-radius:100px;padding:5px 14px;margin-bottom:1.5rem}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:14px;color:var(--text2);max-width:620px;line-height:1.8;margin-bottom:2rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:3rem}
+.tag{font-size:12px;color:var(--text2);border:0.5px solid var(--border2);border-radius:100px;padding:4px 12px}
+.tag-amber{background:rgba(239,159,39,0.1);border-color:rgba(239,159,39,0.3);color:#EF9F27}
+
+/* OVERVIEW STATS */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;max-width:1000px;margin:0 auto;padding:0 2rem 2.5rem}
+.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
+.stat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--accent2);line-height:1}
+.stat-label{font-size:11px;color:var(--text3);margin-top:5px;line-height:1.4}
+
+hr.div{max-width:1000px;margin:0 auto;border:none;border-top:0.5px solid var(--border)}
+
+.section{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);font-weight:400;margin-bottom:0.75rem}
+.section-title em{color:var(--accent);font-style:italic}
+.section-body{font-size:14px;color:var(--text2);line-height:1.9;max-width:680px;margin-bottom:2rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:0}
+.timeline-phase{margin-bottom:2rem}
+.phase-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem;cursor:pointer}
+.phase-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;font-family:'DM Mono',monospace;border:0.5px solid}
+.phase-dot.p1{background:rgba(29,158,117,0.15);border-color:rgba(29,158,117,0.4);color:#5ecba1}
+.phase-dot.p2{background:rgba(55,138,221,0.15);border-color:rgba(55,138,221,0.4);color:#85B7EB}
+.phase-dot.p3{background:rgba(239,159,39,0.15);border-color:rgba(239,159,39,0.4);color:#EF9F27}
+.phase-dot.p4{background:rgba(232,112,64,0.15);border-color:rgba(232,112,64,0.4);color:#E87040}
+.phase-dot.p5{background:rgba(127,119,221,0.15);border-color:rgba(127,119,221,0.4);color:#AFA9EC}
+.phase-info{flex:1}
+.phase-name{font-size:15px;font-weight:500;color:var(--text)}
+.phase-time{font-size:12px;color:var(--text3);margin-top:2px}
+.phase-badge{font-size:10px;padding:3px 10px;border-radius:100px;white-space:nowrap}
+.badge-green{background:rgba(29,158,117,0.15);color:#5ecba1;border:0.5px solid rgba(29,158,117,0.3)}
+.badge-blue{background:rgba(55,138,221,0.15);color:#85B7EB;border:0.5px solid rgba(55,138,221,0.3)}
+.badge-amber{background:rgba(239,159,39,0.15);color:#EF9F27;border:0.5px solid rgba(239,159,39,0.3)}
+.badge-coral{background:rgba(232,112,64,0.15);color:#E87040;border:0.5px solid rgba(232,112,64,0.3)}
+.badge-purple{background:rgba(127,119,221,0.15);color:#AFA9EC;border:0.5px solid rgba(127,119,221,0.3)}
+
+.nodes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;padding-left:48px;margin-bottom:0.5rem}
+.node-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.1rem;transition:border-color 0.15s;cursor:pointer}
+.node-card:hover{border-color:var(--border2)}
+.node-card.expanded{border-color:var(--border2);background:var(--bg3)}
+.node-header{display:flex;align-items:flex-start;gap:10px}
+.node-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);padding-top:2px;min-width:20px}
+.node-title{font-size:13px;font-weight:500;color:var(--text);flex:1;line-height:1.4}
+.node-arrow{font-size:14px;color:var(--text3);transition:transform 0.2s;margin-left:4px}
+.node-card.expanded .node-arrow{transform:rotate(90deg)}
+.node-detail{display:none;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)}
+.node-card.expanded .node-detail{display:block}
+.node-body{font-size:12px;color:var(--text3);line-height:1.7;margin-bottom:8px}
+.node-checklist{list-style:none;display:flex;flex-direction:column;gap:4px}
+.node-checklist li{font-size:11px;color:var(--text3);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.node-checklist li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--text3);margin-top:5px;flex-shrink:0}
+.node-roles{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.role-tag{font-size:10px;padding:2px 7px;border-radius:100px;background:var(--bg4);color:var(--text3);border:0.5px solid var(--border)}
+.role-tag.owner{background:rgba(29,158,117,0.1);color:#5ecba1;border-color:rgba(29,158,117,0.25)}
+
+/* RACI TABLE */
+.raci-wrap{overflow-x:auto;margin-bottom:2rem}
+.raci-table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
+.raci-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);padding:8px 10px;border-bottom:0.5px solid var(--border);font-weight:400;white-space:nowrap}
+.raci-table td{padding:9px 10px;border-bottom:0.5px solid var(--border);color:var(--text2);vertical-align:middle}
+.raci-table tr:hover td{background:var(--bg2)}
+.raci-table tr:last-child td{border-bottom:none}
+.raci-node{font-weight:500;color:var(--text);font-size:12px}
+.r-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:100px;font-weight:500;letter-spacing:0.04em}
+.r-R{background:rgba(29,158,117,0.15);color:#5ecba1}
+.r-A{background:rgba(239,159,39,0.15);color:#EF9F27}
+.r-C{background:rgba(55,138,221,0.15);color:#85B7EB}
+.r-I{background:rgba(88,88,100,0.2);color:var(--text3)}
+
+/* LANG SECTION */
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:2rem}
+.lang-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
+.lang-flag{font-size:22px;margin-bottom:8px;display:block}
+.lang-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
+.lang-scope{font-size:12px;color:var(--text3);line-height:1.6}
+.lang-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.ltag{font-size:10px;padding:2px 7px;border-radius:100px;background:var(--bg3);color:var(--text3);border:0.5px solid var(--border)}
+
+/* MEDIA INVITE */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:2rem}
+.media-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
+.media-type{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:8px}
+.media-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:6px}
+.media-detail{font-size:12px;color:var(--text3);line-height:1.6}
+.media-priority{display:inline-block;margin-top:8px;font-size:10px;padding:2px 8px;border-radius:100px}
+.pri-A{background:rgba(226,75,74,0.15);color:#F09595}
+.pri-B{background:rgba(239,159,39,0.15);color:#EF9F27}
+.pri-C{background:rgba(88,88,100,0.2);color:var(--text3)}
+
+/* MATERIAL TABLE */
+.mat-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:2rem}
+.mat-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);padding:8px 12px;border-bottom:0.5px solid var(--border);font-weight:400}
+.mat-table td{padding:10px 12px;border-bottom:0.5px solid var(--border);color:var(--text2);vertical-align:top}
+.mat-table tr:last-child td{border-bottom:none}
+.mat-table tr:hover td{background:var(--bg2)}
+.mat-name{font-weight:500;color:var(--text)}
+.qty-badge{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent)}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:2.5rem 2rem;text-align:center;font-size:12px;color:var(--text3);max-width:1000px;margin:0 auto}
+footer a{color:var(--text2);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">← 返回作品集主页</a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="nav-dot"></span>
+    <span style="font-size:12px;color:var(--text3)">线下活动 SOP</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><span class="nav-dot"></span> 全球传播课程成果 · 第二模块</div>
+  <h1>海外新能源发布会<br><em>项目执行 SOP</em></h1>
+  <p class="hero-sub">模拟策划国内头部新能源汽车品牌欧洲首站线下发布会及媒体试驾活动，覆盖12个核心执行节点，包含媒体邀约、多语种翻译协同、物料分发全流程规范。</p>
+  <div class="hero-tags">
+    <span class="tag tag-amber">发布会策划</span>
+    <span class="tag">媒体试驾</span>
+    <span class="tag">项目SOP</span>
+    <span class="tag">多语种协同</span>
+    <span class="tag">12个执行节点</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stat-row">
+  <div class="stat-card">
+    <div class="stat-num">12</div>
+    <div class="stat-label">核心执行节点</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">-60d</div>
+    <div class="stat-label">筹备周期（发布会前）</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">3</div>
+    <div class="stat-label">覆盖语言（EN/DE/FR）</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">目标媒体邀约数量</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">5</div>
+    <div class="stat-label">执行阶段划分</div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- TIMELINE + NODES -->
+<div class="section">
+  <div class="section-label">01 · 项目时间线与执行节点</div>
+  <h2 class="section-title">全流程<em>12节点拆解</em></h2>
+  <p class="section-body">以发布会当天（D-Day）为基准，向前倒推60天筹备，向后延伸14天收尾。点击各节点卡片查看执行细节与责任分工。</p>
+
+  <div class="timeline">
+
+    <!-- PHASE 1 -->
+    <div class="timeline-phase">
+      <div class="phase-header">
+        <div class="phase-dot p1">P1</div>
+        <div class="phase-info">
+          <div class="phase-name">战略准备期</div>
+          <div class="phase-time">D-60 → D-45</div>
+        </div>
+        <span class="phase-badge badge-green">前期策划</span>
+      </div>
+      <div class="nodes-grid">
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N01</span>
+            <span class="node-title">目标市场与场地确认</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">确定首站发布城市（建议慕尼黑/阿姆斯特丹），完成场地勘察、容量评估与预订合同签署。</div>
+            <ul class="node-checklist">
+              <li>目标城市媒体密度与交通便利性评估</li>
+              <li>场地容量 ≥ 300人，具备独立试驾路线</li>
+              <li>完成场地合同签署并支付定金</li>
+              <li>确认充电桩安装条件与电力供应</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：项目经理</span>
+              <span class="role-tag">协同：本地执行团队</span>
+              <span class="role-tag">知会：品牌总监</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N02</span>
+            <span class="node-title">媒体邀约名单构建</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">按A/B/C优先级构建媒体矩阵，覆盖汽车垂类、科技媒体、可持续生活类及社媒KOL。</div>
+            <ul class="node-checklist">
+              <li>A级：Auto Motor und Sport、Autocar、TopGear等主流汽车媒体（≥15家）</li>
+              <li>B级：科技类媒体及独立YouTuber（≥20人）</li>
+              <li>C级：可持续/生活方式类KOL（≥15人）</li>
+              <li>每位媒体对应联系人、语言偏好、历史合作记录</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：PR经理</span>
+              <span class="role-tag">协同：翻译团队</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="timeline-phase">
+      <div class="phase-header">
+        <div class="phase-dot p2">P2</div>
+        <div class="phase-info">
+          <div class="phase-name">内容与物料制作期</div>
+          <div class="phase-time">D-45 → D-21</div>
+        </div>
+        <span class="phase-badge badge-blue">内容生产</span>
+      </div>
+      <div class="nodes-grid">
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N03</span>
+            <span class="node-title">多语种媒体邀请函制作</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">制作中/英/德/法四语版邀请函，确保品牌调性与本地语境一致，通过Claude辅助进行创译润色。</div>
+            <ul class="node-checklist">
+              <li>主视觉邀请函设计（Print + Digital两版）</li>
+              <li>英文主版 → 德语/法语创译（非直译，融入本地表达）</li>
+              <li>发送时间：D-30，二次提醒：D-14</li>
+              <li>邀请函需含RSVP链接、日程摘要、交通指引</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：翻译协调员</span>
+              <span class="role-tag">协同：设计团队</span>
+              <span class="role-tag">工具：Claude辅助创译</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N04</span>
+            <span class="node-title">新闻稿与媒体资料包</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">准备发布会当天发出的PR通稿及媒体资料包，中英双语，确保技术参数与品牌话术统一。</div>
+            <ul class="node-checklist">
+              <li>新闻稿（中/英/德/法四语版，各500-800词）</li>
+              <li>产品技术白皮书（英文）</li>
+              <li>高清图片素材包（含产品图、活动场地效果图）</li>
+              <li>品牌故事一页纸（Fact Sheet）</li>
+              <li>发言人Q&A预案（预设20个高频问题）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：PR经理</span>
+              <span class="role-tag">协同：翻译团队</span>
+              <span class="role-tag">工具：ChatGPT辅助生成</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N05</span>
+            <span class="node-title">物料清单与分发规划</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">制定全套物料清单，规划媒体礼袋内容与现场物料摆放方案，确保物料到达时间节点。</div>
+            <ul class="node-checklist">
+              <li>媒体礼袋：品牌手册、U盘素材包、周边礼品</li>
+              <li>现场物料：易拉宝、KV背景板、桌卡、指引牌</li>
+              <li>试驾物料：试驾同意书（三语版）、安全须知卡</li>
+              <li>数字物料：专属媒体资料下载页面（含访问权限）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：执行统筹</span>
+              <span class="role-tag">协同：物流供应商</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N06</span>
+            <span class="node-title">现场翻译团队招募与培训</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">招募覆盖英/德/法的专业同传或陪同翻译，提前进行产品术语培训，确保技术表达准确。</div>
+            <ul class="node-checklist">
+              <li>同传译员：英语（×2）、德语（×1）、法语（×1）</li>
+              <li>陪同翻译：每辆试驾车配备1名中英双语翻译</li>
+              <li>术语表培训：电动汽车专业词汇、品牌核心话术</li>
+              <li>D-7统一进行模拟演练（含突发状况应对）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：翻译协调员</span>
+              <span class="role-tag">协同：HR/外包供应商</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="timeline-phase">
+      <div class="phase-header">
+        <div class="phase-dot p3">P3</div>
+        <div class="phase-info">
+          <div class="phase-name">最终确认期</div>
+          <div class="phase-time">D-21 → D-1</div>
+        </div>
+        <span class="phase-badge badge-amber">冲刺确认</span>
+      </div>
+      <div class="nodes-grid">
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N07</span>
+            <span class="node-title">媒体RSVP汇总与席位安排</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">汇总媒体确认名单，按优先级分配席位，为A级媒体安排专属接待与一对一沟通时段。</div>
+            <ul class="node-checklist">
+              <li>截止D-14完成RSVP统计，目标确认率≥70%</li>
+              <li>A级媒体专属席位（前排+专访时段）</li>
+              <li>制作现场席位卡（三语版姓名+媒体名称）</li>
+              <li>为外地媒体协助预订酒店与接送安排</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：PR经理</span>
+              <span class="role-tag">协同：活动执行</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N08</span>
+            <span class="node-title">试驾路线勘察与安全确认</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">完成试驾路线最终勘察，设置安全保障方案，确保路线符合当地交通法规。</div>
+            <ul class="node-checklist">
+              <li>试驾路线全程勘察（城市道路+高速+弯道）</li>
+              <li>路线全程约40分钟，展示加速/续航/智驾能力</li>
+              <li>急救人员与保险车辆就位</li>
+              <li>当地交通部门沟通与路权确认</li>
+              <li>备用路线规划（应对临时封路）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：本地执行总监</span>
+              <span class="role-tag">协同：安全团队</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N09</span>
+            <span class="node-title">全体演练与流程走位</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">D-1进行全员现场走位演练，包含发言人排练、翻译协同测试与应急预案演练。</div>
+            <ul class="node-checklist">
+              <li>发言人中文演讲稿 + 英语翻译联合排练</li>
+              <li>同传设备测试（耳机分发、信号测试）</li>
+              <li>现场动线走位（媒体签到→发布厅→试驾区→餐叙）</li>
+              <li>突发状况预案演练（设备故障/媒体突发提问）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：活动导演</span>
+              <span class="role-tag">协同：全体执行成员</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="timeline-phase">
+      <div class="phase-header">
+        <div class="phase-dot p4">P4</div>
+        <div class="phase-info">
+          <div class="phase-name">发布会当天</div>
+          <div class="phase-time">D-Day</div>
+        </div>
+        <span class="phase-badge badge-coral">执行日</span>
+      </div>
+      <div class="nodes-grid">
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N10</span>
+            <span class="node-title">媒体签到与物料分发</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">执行媒体签到流程，分发媒体资料包，为A级媒体提供专属接待引导。</div>
+            <ul class="node-checklist">
+              <li>08:30 执行团队全员就位，场地最终检查</li>
+              <li>09:00 媒体签到开放，礼袋分发</li>
+              <li>专属接待员引导A级媒体（中英双语）</li>
+              <li>实时更新到场媒体名单，汇报给PR经理</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：现场统筹</span>
+              <span class="role-tag">协同：礼宾团队（×6）</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N11</span>
+            <span class="node-title">发布会正式呈现与同传执行</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">执行发布会正式演讲与产品亮相流程，同传译员实时执行中→英/德/法三语翻译。</div>
+            <ul class="node-checklist">
+              <li>10:00 开幕致辞（CEO/品牌总裁，中文+同传）</li>
+              <li>10:20 产品技术发布（工程师英文主讲）</li>
+              <li>10:50 品牌欧洲战略宣讲（英文，德法同传）</li>
+              <li>11:15 媒体互动Q&A（三语协同回答）</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：活动导演</span>
+              <span class="role-tag">协同：同传团队</span>
+              <span class="role-tag">协同：技术保障</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N12</span>
+            <span class="node-title">媒体试驾执行与收尾</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">按预约批次执行媒体试驾，陪同翻译全程随车，发布会结束后完成场地清退与媒体送别。</div>
+            <ul class="node-checklist">
+              <li>12:00 试驾开放，按A/B/C优先级批次安排</li>
+              <li>每批次4辆车×6批次，共覆盖约24组媒体</li>
+              <li>试驾后安排专属拍照区与一对一专访时段</li>
+              <li>16:30 餐叙与非正式交流</li>
+              <li>18:00 媒体送别，礼品补发，感谢邮件预发</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：试驾统筹</span>
+              <span class="role-tag">协同：陪同翻译（×4）</span>
+              <span class="role-tag">协同：安全团队</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="timeline-phase">
+      <div class="phase-header">
+        <div class="phase-dot p5">P5</div>
+        <div class="phase-info">
+          <div class="phase-name">收尾与传播期</div>
+          <div class="phase-time">D+1 → D+14</div>
+        </div>
+        <span class="phase-badge badge-purple">后续跟进</span>
+      </div>
+      <div class="nodes-grid">
+        <div class="node-card" onclick="toggleNode(this)">
+          <div class="node-header">
+            <span class="node-num">N+1</span>
+            <span class="node-title">媒体报道监测与声量统计</span>
+            <i class="ti ti-chevron-right node-arrow" aria-hidden="true"></i>
+          </div>
+          <div class="node-detail">
+            <div class="node-body">启动媒体监测，汇总各语言报道数量与情感倾向，形成传播效果初报。</div>
+            <ul class="node-checklist">
+              <li>D+1 发送感谢邮件，附补充素材下载链接</li>
+              <li>D+3 媒体报道首轮汇总（含YouTube发布情况）</li>
+              <li>D+7 声量监测中期报告（含情感分析）</li>
+              <li>D+14 最终传播效果报告，对标KPI完成度</li>
+            </ul>
+            <div class="node-roles">
+              <span class="role-tag owner">负责人：PR经理</span>
+              <span class="role-tag">工具：Meltwater/Mention监测</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- MEDIA INVITE -->
+<div class="section">
+  <div class="section-label">02 · 媒体邀约策略</div>
+  <h2 class="section-title">三级媒体<em>矩阵规划</em></h2>
+  <p class="section-body">按影响力与目标受众匹配度分为A/B/C三级，差异化定制邀约内容与接待方案，最大化传播覆盖与质量。</p>
+
+  <div class="media-grid">
+    <div class="media-card">
+      <div class="media-type">A级 · 汽车主流媒体</div>
+      <div class="media-name">Auto Motor und Sport</div>
+      <div class="media-detail">德国最大汽车媒体，月均读者800万。提供专属试驾+高管专访+首发图片授权。</div>
+      <span class="media-priority pri-A">优先级 A</span>
+    </div>
+    <div class="media-card">
+      <div class="media-type">A级 · 汽车主流媒体</div>
+      <div class="media-name">Autocar / TopGear</div>
+      <div class="media-detail">英国权威汽车媒体，提供试驾体验+专属拍摄时段。TopGear视频可撬动YouTube百万流量。</div>
+      <span class="media-priority pri-A">优先级 A</span>
+    </div>
+    <div class="media-card">
+      <div class="media-type">A级 · 汽车主流媒体</div>
+      <div class="media-name">L'Automobile Magazine</div>
+      <div class="media-detail">法国最具影响力汽车杂志，法语覆盖法比卢市场，提供试驾+专题报道机会。</div>
+      <span class="media-priority pri-A">优先级 A</span>
+    </div>
+    <div class="media-card">
+      <div class="media-type">B级 · 独立评测YouTuber</div>
+      <div class="media-name">Fully Charged Show</div>
+      <div class="media-detail">专注EV内容，订阅量850K+，受众为高净值EV早期采用者，口碑影响力强。</div>
+      <span class="media-priority pri-B">优先级 B</span>
+    </div>
+    <div class="media-card">
+      <div class="media-type">B级 · 科技媒体</div>
+      <div class="media-name">Electrive / InsideEVs</div>
+      <div class="media-detail">欧洲EV垂类媒体，受众为行业专业人士与高意向购车者，技术报道公信力高。</div>
+      <span class="media-priority pri-B">优先级 B</span>
+    </div>
+    <div class="media-card">
+      <div class="media-type">C级 · 生活方式KOL</div>
+      <div class="media-name">可持续生活类博主</div>
+      <div class="media-detail">Instagram/TikTok 10-50万粉中腰部KOL，聚焦可持续出行，与品牌环保叙事高度契合。</div>
+      <span class="media-priority pri-C">优先级 C</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- LANG SECTION -->
+<div class="section">
+  <div class="section-label">03 · 多语种翻译协同</div>
+  <h2 class="section-title">四语协同<em>翻译流程</em></h2>
+  <p class="section-body">建立统一的术语库与审校机制，确保跨语言品牌话术一致性。翻译流程采用"中文主版→英文基准→德/法创译"的阶梯式架构，由翻译协调员统一管控版本。</p>
+
+  <div class="lang-grid">
+    <div class="lang-card">
+      <span class="lang-flag">🇨🇳</span>
+      <div class="lang-name">中文（主版）</div>
+      <div class="lang-scope">品牌核心信息、技术参数、发言人演讲稿。所有内容的源语言，由品牌团队最终审定。</div>
+      <div class="lang-tools"><span class="ltag">源语言</span><span class="ltag">内部审定</span></div>
+    </div>
+    <div class="lang-card">
+      <span class="lang-flag">🇬🇧</span>
+      <div class="lang-name">英文（基准版）</div>
+      <div class="lang-scope">国际传播主版本，所有对外物料均以英文为基准。由具备汽车行业背景的专业译员翻译。</div>
+      <div class="lang-tools"><span class="ltag">对外基准</span><span class="ltag">人工翻译</span><span class="ltag">Claude辅助润色</span></div>
+    </div>
+    <div class="lang-card">
+      <span class="lang-flag">🇩🇪</span>
+      <div class="lang-name">德文（创译版）</div>
+      <div class="lang-scope">针对德语市场进行本地化创译，融入德国汽车文化语境，强调工程精确性与可靠性叙事。</div>
+      <div class="lang-tools"><span class="ltag">本地化创译</span><span class="ltag">母语审校</span></div>
+    </div>
+    <div class="lang-card">
+      <span class="lang-flag">🇫🇷</span>
+      <div class="lang-name">法文（创译版）</div>
+      <div class="lang-scope">针对法语市场创译，强调设计美感与生活品质，规避法国碳足迹政策相关敏感表述。</div>
+      <div class="lang-tools"><span class="ltag">本地化创译</span><span class="ltag">母语审校</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- MATERIAL TABLE -->
+<div class="section">
+  <div class="section-label">04 · 物料分发清单</div>
+  <h2 class="section-title">全套物料<em>执行规范</em></h2>
+
+  <table class="mat-table">
+    <thead>
+      <tr>
+        <th>物料名称</th>
+        <th>数量</th>
+        <th>语言版本</th>
+        <th>分发时机</th>
+        <th>负责人</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="mat-name">媒体礼袋（主袋）</td><td class="qty-badge">60套</td><td>—</td><td>签到时</td><td style="color:var(--text3)">现场统筹</td></tr>
+      <tr><td class="mat-name">品牌产品手册</td><td class="qty-badge">80册</td><td>EN / DE / FR</td><td>签到时（随袋）</td><td style="color:var(--text3)">执行团队</td></tr>
+      <tr><td class="mat-name">USB素材包（高清图+视频）</td><td class="qty-badge">60个</td><td>多语种文件夹</td><td>签到时（随袋）</td><td style="color:var(--text3)">执行团队</td></tr>
+      <tr><td class="mat-name">新闻稿（印刷版）</td><td class="qty-badge">各30份</td><td>EN / DE / FR</td><td>发布会开始前</td><td style="color:var(--text3)">PR经理</td></tr>
+      <tr><td class="mat-name">产品技术规格表</td><td class="qty-badge">80份</td><td>EN（主）+ DE/FR</td><td>发布会开始前</td><td style="color:var(--text3)">执行统筹</td></tr>
+      <tr><td class="mat-name">试驾同意书</td><td class="qty-badge">60份</td><td>EN / DE / FR</td><td>试驾签到时</td><td style="color:var(--text3)">试驾统筹</td></tr>
+      <tr><td class="mat-name">试驾路线图</td><td class="qty-badge">60份</td><td>EN（含地图）</td><td>试驾前</td><td style="color:var(--text3)">试驾统筹</td></tr>
+      <tr><td class="mat-name">席位卡</td><td class="qty-badge">按实际人数</td><td>EN（含姓名）</td><td>提前布置</td><td style="color:var(--text3)">活动执行</td></tr>
+      <tr><td class="mat-name">品牌周边（充电宝/帆布袋）</td><td class="qty-badge">60套</td><td>—</td><td>签到时（随袋）</td><td style="color:var(--text3)">执行团队</td></tr>
+      <tr><td class="mat-name">感谢邮件（含补充素材链接）</td><td class="qty-badge">全部到场媒体</td><td>EN / DE / FR</td><td>D+1 发出</td><td style="color:var(--text3)">PR经理</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- RACI -->
+<div class="section">
+  <div class="section-label">05 · 责任矩阵</div>
+  <h2 class="section-title">RACI<em>分工总览</em></h2>
+  <p class="section-body">R=执行责任人 · A=最终决策者 · C=需咨询 · I=知会</p>
+
+  <div class="raci-wrap">
+    <table class="raci-table">
+      <thead>
+        <tr>
+          <th>执行节点</th>
+          <th>项目经理</th>
+          <th>PR经理</th>
+          <th>翻译协调员</th>
+          <th>活动导演</th>
+          <th>本地执行</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="raci-node">N01 场地确认</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td></tr>
+        <tr><td class="raci-node">N02 媒体名单</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td></tr>
+        <tr><td class="raci-node">N03 多语邀请函</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td></tr>
+        <tr><td class="raci-node">N04 新闻稿制作</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td></tr>
+        <tr><td class="raci-node">N05 物料清单</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-R">R</span></td></tr>
+        <tr><td class="raci-node">N06 翻译培训</td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td></tr>
+        <tr><td class="raci-node">N09 全员演练</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-R">R</span></td></tr>
+        <tr><td class="raci-node">N11 发布会执行</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-R">R</span></td></tr>
+        <tr><td class="raci-node">N12 试驾执行</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-C">C</span></td><td><span class="r-pill r-R">R</span></td></tr>
+        <tr><td class="raci-node">N+1 效果监测</td><td><span class="r-pill r-A">A</span></td><td><span class="r-pill r-R">R</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td><td><span class="r-pill r-I">I</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p>吴住敏 · 上海交通大学翻译硕士 · 全球传播课程成果</p>
+  <p style="margin-top:6px"><a href="index.html">← 返回作品集主页</a> · <a href="mailto:1875812956@qq.com">1875812956@qq.com</a></p>
+</footer>
+
+<script>
+function toggleNode(card){
+  card.classList.toggle('expanded');
+}
+</script>
+</body>
+</html>
