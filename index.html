@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欧洲EV市场分析智能体 · 吴住敏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0f;
+    --bg2: #161618;
+    --bg3: #1e1e21;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0efe8;
+    --text2: #9b9a95;
+    --text3: #5a5957;
+    --green: #1D9E75;
+    --green-dim: rgba(29,158,117,0.15);
+    --accent: #c8b89a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,15,0.85);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--text);
+    text-decoration: none; letter-spacing: 0.01em;
+  }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-tag {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text3);
+  }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 860px; margin: 0 auto;
+    padding: 4rem 2rem 2.5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text2);
+    border: 0.5px solid var(--border2);
+    border-radius: 100px; padding: 5px 14px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 15px; color: var(--text2); max-width: 560px;
+    line-height: 1.7; margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .tag {
+    font-size: 12px; color: var(--text2);
+    border: 0.5px solid var(--border2);
+    border-radius: 100px; padding: 4px 12px;
+  }
+  .tag-green {
+    background: var(--green-dim);
+    border-color: rgba(29,158,117,0.3);
+    color: #5ecba1;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 860px; margin: 0 auto;
+    border: none; border-top: 0.5px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── AGENT SECTION ── */
+  .agent-section {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 0.5px; background: var(--border);
+  }
+
+  /* ── PRESET GRID ── */
+  .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px; margin-bottom: 1.25rem;
+  }
+  .preset-btn {
+    text-align: left; cursor: pointer;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 12px 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; color: var(--text2);
+    line-height: 1.5; transition: all 0.15s;
+  }
+  .preset-btn:hover {
+    border-color: var(--border2); color: var(--text);
+    background: var(--bg3);
+  }
+  .preset-icon {
+    font-size: 16px; display: block;
+    margin-bottom: 6px; color: var(--text3);
+  }
+
+  /* ── INPUT ROW ── */
+  .input-row {
+    display: flex; gap: 8px; align-items: flex-end;
+    margin-bottom: 1.5rem;
+  }
+  .input-wrap { flex: 1; }
+  .input-wrap textarea {
+    width: 100%;
+    background: var(--bg2);
+    border: 0.5px solid var(--border2);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Syne', sans-serif; font-size: 14px;
+    padding: 12px 16px; resize: none; height: 50px;
+    line-height: 1.5; outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-wrap textarea:focus { border-color: var(--green); }
+  .input-wrap textarea::placeholder { color: var(--text3); }
+  .send-btn {
+    height: 50px; padding: 0 22px;
+    background: var(--green); color: #fff;
+    border: none; border-radius: 10px;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+    transition: opacity 0.15s;
+  }
+  .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .send-btn:not(:disabled):hover { opacity: 0.85; }
+
+  /* ── RESPONSE ── */
+  .thinking {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--text2); padding: 1rem 0;
+  }
+  .thinking-dots span {
+    display: inline-block; width: 4px; height: 4px;
+    border-radius: 50%; background: currentColor;
+    animation: blink 1.2s infinite;
+  }
+  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+
+  .response-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    animation: fadeUp 0.3s ease; margin-bottom: 10px;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  .resp-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--bg3);
+  }
+  .resp-header-left { display: flex; align-items: center; gap: 8px; }
+  .resp-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); }
+  .copy-btn {
+    font-size: 12px; color: var(--text3);
+    background: none; border: none; cursor: pointer;
+    font-family: 'Syne', sans-serif; padding: 3px 8px;
+    border-radius: 6px; transition: color 0.15s;
+  }
+  .copy-btn:hover { color: var(--text); }
+
+  .resp-body {
+    padding: 1.25rem 1.5rem;
+    font-size: 14px; line-height: 1.8;
+    color: var(--text); white-space: pre-wrap;
+    word-break: break-word; max-height: 500px; overflow-y: auto;
+  }
+  .resp-body strong { font-weight: 500; color: var(--accent); }
+
+  .resp-footer {
+    padding: 10px 16px;
+    border-top: 0.5px solid var(--border);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .follow-btn {
+    font-size: 12px; color: var(--text2);
+    background: var(--bg3); border: 0.5px solid var(--border);
+    border-radius: 100px; padding: 5px 12px;
+    cursor: pointer; font-family: 'Syne', sans-serif;
+    transition: all 0.15s;
+  }
+  .follow-btn:hover { color: var(--text); border-color: var(--border2); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12px; color: var(--text3);
+  }
+  footer a { color: var(--text2); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* ── ABOUT BAR ── */
+  .about-bar {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .about-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.25rem;
+  }
+  .about-card-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .about-card-value { font-size: 13px; color: var(--text2); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">吴住敏 · Portfolio</a>
+  <div class="nav-right">
+    <span class="nav-tag">全球传播课程成果</span>
+    <span class="nav-dot"></span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="nav-dot"></span>
+    AI-Powered Market Intelligence
+  </div>
+  <h1>欧洲 EV 市场<br><em>分析智能体</em></h1>
+  <p class="hero-sub">
+    基于 Claude API 搭建的市场分析工具，专注于中国新能源汽车品牌进入欧洲市场的政策研究、竞品分析与传播策略制定。
+  </p>
+  <div class="hero-meta">
+    <span class="tag tag-green">智能体运行中</span>
+    <span class="tag">欧洲EV市场</span>
+    <span class="tag">整合营销策划</span>
+    <span class="tag">Claude API</span>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="about-bar">
+  <div class="about-card">
+    <div class="about-card-label">项目背景</div>
+    <div class="about-card-value">全球传播课程独立项目，模拟中国头部新能源品牌欧洲市场进入策略</div>
+  </div>
+  <div class="about-card">
+    <div class="about-card-label">技术栈</div>
+    <div class="about-card-value">Claude API · Python (SnowNLP) · 情感分析 · 整合营销</div>
+  </div>
+  <div class="about-card">
+    <div class="about-card-label">覆盖市场</div>
+    <div class="about-card-value">德国 · 法国 · 荷兰 · 挪威 · 英国 · 西班牙</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="agent-section">
+  <div class="section-label">市场分析智能体</div>
+
+  <div class="preset-grid">
+    <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="德国、法国、荷兰的EV市场准入政策有哪些核心差异？">
+      <i class="ti ti-file-certificate preset-icon" aria-hidden="true"></i>
+      市场准入政策对比
+    </button>
+    <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="2024年欧洲主要国家的EV购车补贴政策是什么？哪个市场对中国品牌最有利？">
+      <i class="ti ti-cash preset-icon" aria-hidden="true"></i>
+      补贴偏好分析
+    </button>
+    <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="比亚迪、蔚来、小鹏在欧洲市场的品牌认知度和竞争格局如何？">
+      <i class="ti ti-chart-bar preset-icon" aria-hidden="true"></i>
+      中国品牌竞争格局
+    </button>
+    <button class="preset-btn" onclick="fillPreset(this.dataset.q)" data-q="欧洲消费者对中国新能源汽车的核心顾虑是什么？如何制定针对性的传播策略？">
+      <i class="ti ti-users preset-icon" aria-hidden="true"></i>
+      消费者洞察
+    </button>
+  </div>
+
+  <div class="input-row">
+    <div class="input-wrap">
+      <textarea id="user-input" placeholder="输入市场分析问题，例如：哪个欧洲市场最适合中国EV品牌首批进入？" onkeydown="handleKey(event)"></textarea>
+    </div>
+    <button class="send-btn" id="send-btn" onclick="sendQuery()">
+      <i class="ti ti-send" aria-hidden="true"></i> 分析
+    </button>
+  </div>
+
+  <div id="response-area"></div>
+</div>
+
+<footer>
+  <p>吴住敏 · 上海交通大学翻译硕士 · 全球传播课程成果</p>
+  <p style="margin-top:6px;">
+    <a href="mailto:1875812956@qq.com">1875812956@qq.com</a>
+  </p>
+</footer>
+
+<script>
+const SYSTEM_PROMPT = `你是一位专注于欧洲电动汽车（EV）市场的高级商业分析师，服务于计划进入欧洲市场的中国新能源汽车品牌。
+
+你的专业领域覆盖：
+- 欧洲各国EV市场准入政策（WVTA认证、UNECE法规、欧盟电池法规、碳关税等）
+- 各国购车补贴及税收优惠政策（德国、法国、荷兰、挪威、英国等）
+- 主要竞品分析（特斯拉、大众ID系列、宝马i系列、比亚迪欧版等）
+- 欧洲消费者对中国EV品牌的认知与顾虑
+- 整合营销传播策略建议
+
+回答要求：
+1. 结构清晰，使用【市场概况】【政策要点】【策略建议】等标签分段
+2. 尽量提供具体数据和政策名称
+3. 对中国品牌进入欧洲市场的机遇与风险给出客观判断
+4. 回答语言：跟随用户提问语言（中文问则中文答，英文问则英文答）
+5. 字数控制在400-600字，聚焦核心洞察`;
+
+let conversationHistory = [];
+
+function fillPreset(q) {
+  document.getElementById('user-input').value = q;
+  document.getElementById('user-input').focus();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuery(); }
+}
+
+async function sendQuery() {
+  const input = document.getElementById('user-input');
+  const btn = document.getElementById('send-btn');
+  const q = input.value.trim();
+  if (!q) return;
+
+  input.value = '';
+  btn.disabled = true;
+
+  conversationHistory.push({ role: 'user', content: q });
+
+  const area = document.getElementById('response-area');
+
+  const thinking = document.createElement('div');
+  thinking.className = 'thinking';
+  thinking.innerHTML = `<i class="ti ti-brain" style="font-size:16px" aria-hidden="true"></i> 正在分析市场数据... <span class="thinking-dots"><span></span><span></span><span></span></span>`;
+  area.prepend(thinking);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.map(b => b.text || '').join('') || '分析失败，请重试。';
+    conversationHistory.push({ role: 'assistant', content: text });
+
+    thinking.remove();
+
+    const card = document.createElement('div');
+    card.className = 'response-card';
+
+    const followUps = [
+      ["具体分析德国市场", "德国EV市场的准入壁垒和消费者偏好具体是什么？"],
+      ["补贴政策详情", "请详细列出法国和荷兰的EV补贴金额和申请条件"],
+      ["传播策略建议", "基于以上分析，为中国新能源品牌制定欧洲市场的整合传播策略"]
+    ];
+
+    const followHtml = followUps.map(([label, q]) =>
+      `<button class="follow-btn" onclick="fillAndSend('${q.replace(/'/g,"\\'")}')"> ${label} ↗</button>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="resp-header">
+        <div class="resp-header-left">
+          <i class="ti ti-sparkles" style="font-size:14px;color:#5a5957" aria-hidden="true"></i>
+          <span class="resp-label">市场分析结果</span>
+        </div>
+        <button class="copy-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+      </div>
+      <div class="resp-body">${formatText(text)}</div>
+      <div class="resp-footer">${followHtml}</div>
+    `;
+
+    area.prepend(card);
+
+  } catch(e) {
+    thinking.remove();
+    const err = document.createElement('div');
+    err.style.cssText = 'font-size:13px;color:#e24b4a;padding:0.75rem 0;';
+    err.textContent = '连接失败，请检查网络后重试。';
+    area.prepend(err);
+  }
+
+  btn.disabled = false;
+  input.focus();
+}
+
+function fillAndSend(q) {
+  document.getElementById('user-input').value = q;
+  sendQuery();
+}
+
+function copyText(btn) {
+  const text = btn.closest('.response-card').querySelector('.resp-body').innerText;
+  navigator.clipboard.writeText(text);
+  btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> 已复制';
+  setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> 复制'; }, 2000);
+}
+
+function formatText(t) {
+  return t
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/【(.+?)】/g, '<strong>【$1】</strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+</script>
+</body>
+</html>
