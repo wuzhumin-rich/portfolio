@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整合营销物料 · 吴住敏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e0e0f;--bg2:#161618;--bg3:#1e1e21;--bg4:#242428;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0efe8;--text2:#9b9a95;--text3:#5a5957;
+  --green:#1D9E75;--green-dim:rgba(29,158,117,0.12);
+  --accent:#c8b89a;--accent2:#e8d5b5;
+  --blue:#378ADD;--amber:#EF9F27;--coral:#E87040;--purple:#7F77DD;
+}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-height:1.6}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.92);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-links a{font-size:12px;color:var(--text2);text-decoration:none;letter-spacing:0.04em;transition:color 0.15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text)}
+
+.hero{max-width:1000px;margin:0 auto;padding:4rem 2rem 2.5rem}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:14px;color:var(--text2);max-width:600px;line-height:1.8}
+
+hr.div{max-width:1000px;margin:2.5rem auto 0;border:none;border-top:0.5px solid var(--border)}
+.section{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);font-weight:400;margin-bottom:0.75rem}
+.section-title em{color:var(--accent);font-style:italic}
+.section-body{font-size:14px;color:var(--text2);line-height:1.9;max-width:680px;margin-bottom:2rem}
+
+/* ── KV MAIN ── */
+.kv-main{
+  width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  position:relative;margin-bottom:1.5rem;
+  background:#0a0a0c;border:0.5px solid var(--border2);
+}
+.kv-main svg{width:100%;height:100%}
+
+/* ── IG GRID ── */
+.ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:2rem}
+.ig-card{aspect-ratio:1/1;border-radius:10px;overflow:hidden;cursor:pointer;position:relative;border:0.5px solid var(--border);transition:transform 0.2s,border-color 0.2s}
+.ig-card:hover{transform:scale(1.03);border-color:var(--border2)}
+.ig-card svg{width:100%;height:100%;display:block}
+.ig-label{position:absolute;bottom:0;left:0;right:0;padding:8px 10px;background:linear-gradient(transparent,rgba(0,0,0,0.7));font-size:10px;color:rgba(255,255,255,0.7);letter-spacing:0.04em}
+
+/* ── COPY TABS ── */
+.tab-row{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab-btn{font-size:12px;padding:6px 14px;border-radius:100px;border:0.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Syne',sans-serif;transition:all 0.15s}
+.tab-btn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.tab-btn:hover:not(.active){color:var(--text);border-color:var(--border2)}
+
+.copy-panels{}
+.copy-panel{display:none}
+.copy-panel.active{display:block}
+
+/* ── COPY CARD ── */
+.copy-list{display:flex;flex-direction:column;gap:10px}
+.copy-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.15s}
+.copy-card:hover{border-color:var(--border2)}
+.copy-card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:0.5px solid var(--border);background:var(--bg3)}
+.copy-card-meta{display:flex;align-items:center;gap:8px}
+.copy-tag{font-size:10px;padding:2px 8px;border-radius:100px;letter-spacing:0.04em}
+.ctag-pr{background:rgba(55,138,221,0.15);color:#85B7EB;border:0.5px solid rgba(55,138,221,0.3)}
+.ctag-kol{background:rgba(29,158,117,0.15);color:#5ecba1;border:0.5px solid rgba(29,158,117,0.3)}
+.ctag-social{background:rgba(127,119,221,0.15);color:#AFA9EC;border:0.5px solid rgba(127,119,221,0.3)}
+.ctag-de{background:rgba(239,159,39,0.12);color:#EF9F27;border:0.5px solid rgba(239,159,39,0.25)}
+.ctag-fr{background:rgba(232,112,64,0.12);color:#E87040;border:0.5px solid rgba(232,112,64,0.25)}
+.ctag-en{background:rgba(88,88,100,0.2);color:var(--text2);border:0.5px solid var(--border2)}
+.copy-title{font-size:12px;font-weight:500;color:var(--text)}
+.copy-actions{display:flex;gap:6px}
+.action-btn{font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:'Syne',sans-serif;padding:2px 6px;border-radius:6px;transition:color 0.15s;display:flex;align-items:center;gap:4px}
+.action-btn:hover{color:var(--text)}
+.copy-body{padding:1rem 1.25rem;font-size:13px;color:var(--text2);line-height:1.8;white-space:pre-wrap;max-height:220px;overflow-y:auto}
+.copy-body.collapsed{max-height:80px;overflow:hidden;position:relative}
+.copy-body.collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--bg2))}
+
+/* ── AI GEN ── */
+.gen-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;margin-top:1.5rem}
+.gen-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.gen-select{background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;color:var(--text2);font-family:'Syne',sans-serif;font-size:12px;padding:6px 10px;outline:none}
+.gen-input{flex:1;min-width:200px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;padding:8px 12px;outline:none}
+.gen-input::placeholder{color:var(--text3)}
+.gen-input:focus{border-color:var(--green)}
+.gen-btn{padding:8px 18px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:opacity 0.15s;display:flex;align-items:center;gap:6px}
+.gen-btn:disabled{opacity:0.35;cursor:not-allowed}
+.gen-btn:not(:disabled):hover{opacity:0.85}
+.gen-result{background:var(--bg3);border-radius:8px;padding:1rem;font-size:13px;color:var(--text2);line-height:1.8;white-space:pre-wrap;min-height:60px;display:none}
+.gen-result.show{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.gen-thinking{font-size:12px;color:var(--text3);display:none;align-items:center;gap:8px;padding:0.5rem 0}
+.gen-thinking.show{display:flex}
+.dots span{display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;animation:blink 1.2s infinite}
+.dots span:nth-child(2){animation-delay:0.2s}
+.dots span:nth-child(3){animation-delay:0.4s}
+@keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">吴住敏 · EV欧洲市场全案</a>
+  <div class="nav-links">
+    <a href="index.html#report">市场分析报告</a>
+    <a href="index.html#agent">分析智能体</a>
+    <a href="event-sop.html">线下活动SOP</a>
+    <a href="marketing.html" class="active">整合营销</a>
+    <a href="evaluation.html">效果评估</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>整合营销<em>视觉与文案</em></h1>
+  <p class="hero-sub">发布会主视觉KV、5套Instagram视觉物料，及面向欧洲市场的PR通稿、KOL种草文案全套内容。</p>
+</div>
+
+<hr class="div">
+
+<!-- KV MAIN -->
+<div class="section">
+  <div class="section-label">01 · 发布会主视觉</div>
+  <h2 class="section-title">Key Visual <em>主KV</em></h2>
+  <p class="section-body">以"Beyond Borders"为核心传播主题，融合欧洲建筑线条美学与新能源科技感，主色调采用深夜蓝与极光金，呈现中国新能源品牌进入欧洲的历史时刻。</p>
+
+  <div class="kv-main">
+    <svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#060810"/>
+          <stop offset="50%" style="stop-color:#0a0f1e"/>
+          <stop offset="100%" style="stop-color:#050810"/>
+        </linearGradient>
+        <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1D9E75;stop-opacity:0"/>
+          <stop offset="30%" style="stop-color:#1D9E75;stop-opacity:0.8"/>
+          <stop offset="70%" style="stop-color:#c8b89a;stop-opacity:0.6"/>
+          <stop offset="100%" style="stop-color:#c8b89a;stop-opacity:0"/>
+        </linearGradient>
+        <linearGradient id="carGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a1f35"/>
+          <stop offset="100%" style="stop-color:#0a0c18"/>
+        </linearGradient>
+        <radialGradient id="halo" cx="50%" cy="60%" r="50%">
+          <stop offset="0%" style="stop-color:#1D9E75;stop-opacity:0.15"/>
+          <stop offset="100%" style="stop-color:#1D9E75;stop-opacity:0"/>
+        </radialGradient>
+        <filter id="blur4"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>
+        <filter id="glow"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- BG -->
+      <rect width="1200" height="675" fill="url(#bgGrad)"/>
+      <rect width="1200" height="675" fill="url(#halo)"/>
+
+      <!-- Grid lines subtle -->
+      <g opacity="0.04" stroke="#c8b89a" stroke-width="0.5">
+        <line x1="0" y1="135" x2="1200" y2="135"/>
+        <line x1="0" y1="270" x2="1200" y2="270"/>
+        <line x1="0" y1="405" x2="1200" y2="405"/>
+        <line x1="0" y1="540" x2="1200" y2="540"/>
+        <line x1="240" y1="0" x2="240" y2="675"/>
+        <line x1="480" y1="0" x2="480" y2="675"/>
+        <line x1="720" y1="0" x2="720" y2="675"/>
+        <line x1="960" y1="0" x2="960" y2="675"/>
+      </g>
+
+      <!-- Architectural lines (European city silhouette abstraction) -->
+      <g opacity="0.12" stroke="#c8b89a" stroke-width="1" fill="none">
+        <!-- Left building shapes -->
+        <rect x="60" y="320" width="40" height="220" rx="1"/>
+        <rect x="75" y="290" width="12" height="30"/>
+        <rect x="110" y="360" width="30" height="180" rx="1"/>
+        <rect x="145" y="300" width="50" height="240" rx="1"/>
+        <rect x="160" y="270" width="20" height="30"/>
+        <rect x="200" y="380" width="35" height="160" rx="1"/>
+        <rect x="240" y="340" width="25" height="200" rx="1"/>
+        <!-- Right building shapes -->
+        <rect x="960" y="350" width="35" height="190" rx="1"/>
+        <rect x="1000" y="300" width="45" height="240" rx="1"/>
+        <rect x="1015" y="270" width="15" height="30"/>
+        <rect x="1055" y="360" width="30" height="180" rx="1"/>
+        <rect x="1090" y="320" width="50" height="220" rx="1"/>
+        <rect x="1105" y="290" width="20" height="30"/>
+      </g>
+
+      <!-- Stars / particles -->
+      <g fill="#c8b89a">
+        <circle cx="120" cy="80" r="1" opacity="0.6"/>
+        <circle cx="280" cy="50" r="0.8" opacity="0.4"/>
+        <circle cx="450" cy="120" r="1.2" opacity="0.5"/>
+        <circle cx="620" cy="40" r="0.8" opacity="0.6"/>
+        <circle cx="780" cy="90" r="1" opacity="0.4"/>
+        <circle cx="950" cy="60" r="1.2" opacity="0.5"/>
+        <circle cx="1080" cy="110" r="0.8" opacity="0.6"/>
+        <circle cx="200" cy="160" r="0.6" opacity="0.3"/>
+        <circle cx="880" cy="140" r="0.6" opacity="0.3"/>
+        <circle cx="350" cy="200" r="0.8" opacity="0.4"/>
+        <circle cx="1020" cy="180" r="1" opacity="0.3"/>
+      </g>
+
+      <!-- Car silhouette (abstract EV sedan) -->
+      <g transform="translate(300,320)" opacity="0.95">
+        <!-- Body -->
+        <path d="M80,120 Q90,80 140,65 L320,50 Q380,48 430,65 L520,85 Q560,90 580,110 L590,120 Q600,128 595,140 L80,140 Q75,132 80,120Z" fill="url(#carGrad)" stroke="#1D9E75" stroke-width="1.2"/>
+        <!-- Roof -->
+        <path d="M180,65 Q220,20 300,15 Q370,10 420,25 L460,45 L200,50Z" fill="#0f1428" stroke="#c8b89a" stroke-width="0.8" opacity="0.8"/>
+        <!-- Windows -->
+        <path d="M195,62 Q225,28 295,22 L340,20 L340,48 L195,50Z" fill="#1a2540" opacity="0.9" stroke="#c8b89a" stroke-width="0.5"/>
+        <path d="M345,20 Q390,16 420,26 L455,44 L345,48Z" fill="#1a2540" opacity="0.9" stroke="#c8b89a" stroke-width="0.5"/>
+        <!-- Wheels -->
+        <circle cx="160" cy="140" r="35" fill="#0a0c14" stroke="#1D9E75" stroke-width="1.5"/>
+        <circle cx="160" cy="140" r="22" fill="#111420" stroke="#c8b89a" stroke-width="0.8"/>
+        <circle cx="160" cy="140" r="8" fill="#1D9E75" opacity="0.8"/>
+        <circle cx="460" cy="140" r="35" fill="#0a0c14" stroke="#1D9E75" stroke-width="1.5"/>
+        <circle cx="460" cy="140" r="22" fill="#111420" stroke="#c8b89a" stroke-width="0.8"/>
+        <circle cx="460" cy="140" r="8" fill="#1D9E75" opacity="0.8"/>
+        <!-- Headlight glow -->
+        <ellipse cx="580" cy="110" rx="18" ry="8" fill="#1D9E75" opacity="0.6" filter="url(#blur2)"/>
+        <ellipse cx="580" cy="110" rx="8" ry="4" fill="#5ecba1" opacity="0.9"/>
+        <!-- Ground reflection -->
+        <path d="M80,142 L595,142 Q600,155 590,165 L85,165 Q75,158 80,142Z" fill="#1D9E75" opacity="0.05"/>
+      </g>
+
+      <!-- Glow line beneath car -->
+      <rect x="200" y="462" width="800" height="1.5" fill="url(#glowLine)" opacity="0.7"/>
+      <rect x="200" y="462" width="800" height="6" fill="url(#glowLine)" opacity="0.15" filter="url(#blur4)"/>
+
+      <!-- Horizon glow -->
+      <ellipse cx="600" cy="465" rx="400" ry="60" fill="#1D9E75" opacity="0.06" filter="url(#blur4)"/>
+
+      <!-- Main headline -->
+      <text x="600" y="530" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="400" fill="#e8d5b5" letter-spacing="8" opacity="0.95">BEYOND BORDERS</text>
+
+      <!-- Sub text -->
+      <text x="600" y="565" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#9b9a95" letter-spacing="4">THE FUTURE OF ELECTRIC MOBILITY IN EUROPE</text>
+
+      <!-- Brand mark area -->
+      <g transform="translate(80,580)">
+        <rect width="2" height="28" fill="#1D9E75"/>
+        <text x="12" y="14" font-family="Georgia,serif" font-size="13" fill="#c8b89a" dominant-baseline="middle" letter-spacing="2">LAUNCH EVENT</text>
+        <text x="12" y="30" font-family="Georgia,serif" font-size="10" fill="#5a5957" dominant-baseline="middle" letter-spacing="2">MUNICH · AMSTERDAM · 2025</text>
+      </g>
+
+      <!-- Top left accent line -->
+      <rect x="80" y="68" width="120" height="0.8" fill="#1D9E75" opacity="0.6"/>
+      <rect x="80" y="68" width="40" height="0.8" fill="#c8b89a"/>
+
+      <!-- Corner marks -->
+      <g stroke="#c8b89a" stroke-width="0.8" fill="none" opacity="0.3">
+        <path d="M80,55 L80,68 L95,68"/>
+        <path d="M1120,55 L1120,68 L1105,68"/>
+        <path d="M80,620 L80,607 L95,607"/>
+        <path d="M1120,620 L1120,607 L1105,607"/>
+      </g>
+    </svg>
+  </div>
+
+  <p style="font-size:12px;color:var(--text3);margin-bottom:2rem">主题：Beyond Borders · 配色：深夜蓝 #060810 · 极光绿 #1D9E75 · 暖金 #c8b89a · 尺寸：1920×1080px</p>
+</div>
+
+<hr class="div">
+
+<!-- IG 5 SETS -->
+<div class="section">
+  <div class="section-label">02 · Instagram 视觉物料</div>
+  <h2 class="section-title">5套<em>社媒视觉</em></h2>
+  <p class="section-body">围绕发布会核心信息，设计5套适配 Instagram 1:1 方形格式的视觉物料，覆盖产品揭幕、数据可视化、消费者情感、可持续承诺、活动倒计时五个传播节点。</p>
+
+  <div class="ig-grid">
+    <!-- IG 1: Product reveal -->
+    <div class="ig-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ig1bg" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" style="stop-color:#0f1a2e"/>
+            <stop offset="100%" style="stop-color:#060810"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="400" fill="url(#ig1bg)"/>
+        <!-- Geometric frame -->
+        <rect x="20" y="20" width="360" height="360" fill="none" stroke="#1D9E75" stroke-width="0.8" opacity="0.4"/>
+        <rect x="30" y="30" width="340" height="340" fill="none" stroke="#c8b89a" stroke-width="0.3" opacity="0.3"/>
+        <!-- Car silhouette small -->
+        <g transform="translate(40,150) scale(0.52)">
+          <path d="M80,120 Q90,80 140,65 L320,50 Q380,48 430,65 L520,85 Q560,90 580,110 L590,120 Q600,128 595,140 L80,140Z" fill="#0d1525" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M180,65 Q220,20 300,15 Q370,10 420,25 L460,45 L200,50Z" fill="#111d35" stroke="#c8b89a" stroke-width="1"/>
+          <circle cx="160" cy="140" r="35" fill="#060810" stroke="#1D9E75" stroke-width="2"/>
+          <circle cx="160" cy="140" r="12" fill="#1D9E75" opacity="0.7"/>
+          <circle cx="460" cy="140" r="35" fill="#060810" stroke="#1D9E75" stroke-width="2"/>
+          <circle cx="460" cy="140" r="12" fill="#1D9E75" opacity="0.7"/>
+        </g>
+        <!-- Glow line -->
+        <rect x="40" y="232" width="320" height="1" fill="#1D9E75" opacity="0.5"/>
+        <!-- Text -->
+        <text x="200" y="275" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#e8d5b5" letter-spacing="3">UNVEILED.</text>
+        <text x="200" y="300" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#5ecba1" letter-spacing="4">EUROPE LAUNCH 2025</text>
+        <text x="200" y="360" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="2">#BeyondBorders #EVEurope</text>
+        <!-- Corner marks -->
+        <g stroke="#c8b89a" stroke-width="0.6" fill="none" opacity="0.4">
+          <path d="M20,20 L20,36 L36,36"/><path d="M380,20 L380,36 L364,36"/>
+          <path d="M20,380 L20,364 L36,364"/><path d="M380,380 L380,364 L364,364"/>
+        </g>
+      </svg>
+      <div class="ig-label">01 · 产品揭幕</div>
+    </div>
+
+    <!-- IG 2: Data viz -->
+    <div class="ig-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="400" fill="#0a0c10"/>
+        <rect x="20" y="20" width="360" height="360" fill="none" stroke="#c8b89a" stroke-width="0.5" opacity="0.2"/>
+        <!-- Data bars -->
+        <g>
+          <text x="40" y="60" font-family="Georgia,serif" font-size="13" fill="#c8b89a" letter-spacing="2">EUROPE EV</text>
+          <text x="40" y="80" font-family="Georgia,serif" font-size="13" fill="#5ecba1" letter-spacing="2">PENETRATION</text>
+          <!-- Norway -->
+          <text x="40" y="120" font-family="Georgia,serif" font-size="10" fill="#9b9a95">Norway</text>
+          <rect x="40" y="126" width="288" height="6" rx="3" fill="#1D9E75" opacity="0.9"/>
+          <text x="335" y="134" font-family="Georgia,serif" font-size="10" fill="#5ecba1">90%</text>
+          <!-- Netherlands -->
+          <text x="40" y="152" font-family="Georgia,serif" font-size="10" fill="#9b9a95">Netherlands</text>
+          <rect x="40" y="158" width="112" height="6" rx="3" fill="#1D9E75" opacity="0.7"/>
+          <text x="158" y="166" font-family="Georgia,serif" font-size="10" fill="#9b9a95">35%</text>
+          <!-- UK -->
+          <text x="40" y="184" font-family="Georgia,serif" font-size="10" fill="#9b9a95">UK</text>
+          <rect x="40" y="190" width="70" height="6" rx="3" fill="#1D9E75" opacity="0.5"/>
+          <text x="116" y="198" font-family="Georgia,serif" font-size="10" fill="#9b9a95">22%</text>
+          <!-- France -->
+          <text x="40" y="216" font-family="Georgia,serif" font-size="10" fill="#9b9a95">France</text>
+          <rect x="40" y="222" width="54" height="6" rx="3" fill="#1D9E75" opacity="0.4"/>
+          <text x="100" y="230" font-family="Georgia,serif" font-size="10" fill="#9b9a95">17%</text>
+          <!-- Germany -->
+          <text x="40" y="248" font-family="Georgia,serif" font-size="10" fill="#9b9a95">Germany</text>
+          <rect x="40" y="254" width="43" height="6" rx="3" fill="#1D9E75" opacity="0.3"/>
+          <text x="89" y="262" font-family="Georgia,serif" font-size="10" fill="#9b9a95">13.5%</text>
+        </g>
+        <rect x="40" y="285" width="320" height="0.5" fill="#c8b89a" opacity="0.15"/>
+        <text x="40" y="315" font-family="Georgia,serif" font-size="28" fill="#e8d5b5">230万</text>
+        <text x="40" y="338" font-family="Georgia,serif" font-size="10" fill="#5a5957" letter-spacing="1">2024年欧洲EV销量</text>
+        <text x="40" y="370" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="2">#EVData #GreenMobility</text>
+      </svg>
+      <div class="ig-label">02 · 市场数据</div>
+    </div>
+
+    <!-- IG 3: Emotion / lifestyle -->
+    <div class="ig-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ig3bg" cx="30%" cy="40%" r="80%">
+            <stop offset="0%" style="stop-color:#0d1f18"/>
+            <stop offset="100%" style="stop-color:#060810"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="400" fill="url(#ig3bg)"/>
+        <!-- Large quote mark -->
+        <text x="35" y="130" font-family="Georgia,serif" font-size="120" fill="#1D9E75" opacity="0.12">"</text>
+        <!-- Quote text -->
+        <text x="55" y="170" font-family="Georgia,serif" font-size="18" fill="#e8d5b5" font-style="italic">The future</text>
+        <text x="55" y="198" font-family="Georgia,serif" font-size="18" fill="#e8d5b5" font-style="italic">doesn't wait</text>
+        <text x="55" y="226" font-family="Georgia,serif" font-size="18" fill="#5ecba1" font-style="italic">at the border.</text>
+        <!-- Divider -->
+        <rect x="55" y="250" width="40" height="1" fill="#1D9E75"/>
+        <text x="55" y="275" font-family="Georgia,serif" font-size="10" fill="#9b9a95" letter-spacing="2">DRIVING EUROPE FORWARD</text>
+        <!-- Abstract circle element -->
+        <circle cx="320" cy="100" r="80" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.2"/>
+        <circle cx="320" cy="100" r="55" fill="none" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <circle cx="320" cy="100" r="8" fill="#1D9E75" opacity="0.4"/>
+        <!-- Bottom tag -->
+        <text x="200" y="370" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="2">#BeyondBorders #ElectricFuture</text>
+        <rect x="20" y="20" width="360" height="360" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.2"/>
+      </svg>
+      <div class="ig-label">03 · 品牌态度</div>
+    </div>
+
+    <!-- IG 4: Sustainability -->
+    <div class="ig-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="400" fill="#060c0a"/>
+        <rect x="20" y="20" width="360" height="360" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.25"/>
+        <!-- Large number -->
+        <text x="200" y="170" text-anchor="middle" font-family="Georgia,serif" font-size="100" fill="#1D9E75" opacity="0.15">0</text>
+        <text x="200" y="170" text-anchor="middle" font-family="Georgia,serif" font-size="72" fill="#5ecba1" opacity="0.9">ZERO</text>
+        <!-- Sub -->
+        <text x="200" y="205" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#9b9a95" letter-spacing="3">EMISSION COMMITMENT</text>
+        <!-- Stats row -->
+        <rect x="40" y="230" width="320" height="0.5" fill="#1D9E75" opacity="0.3"/>
+        <text x="100" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#e8d5b5">100%</text>
+        <text x="100" y="285" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="1">GREEN ENERGY</text>
+        <text x="200" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#e8d5b5">8yr</text>
+        <text x="200" y="285" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="1">BATTERY WARRANTY</text>
+        <text x="300" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#e8d5b5">500+</text>
+        <text x="300" y="285" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="1">KM RANGE</text>
+        <!-- Bottom -->
+        <text x="200" y="360" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="2">#Sustainability #GreenEV #ZeroEmission</text>
+      </svg>
+      <div class="ig-label">04 · 可持续承诺</div>
+    </div>
+
+    <!-- IG 5: Countdown -->
+    <div class="ig-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ig5bg" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" style="stop-color:#120e06"/>
+            <stop offset="100%" style="stop-color:#060810"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="400" fill="url(#ig5bg)"/>
+        <rect x="20" y="20" width="360" height="360" fill="none" stroke="#EF9F27" stroke-width="0.5" opacity="0.3"/>
+        <!-- Countdown number -->
+        <text x="200" y="40" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#EF9F27" letter-spacing="4">LAUNCHING IN</text>
+        <text x="200" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="140" fill="#EF9F27" opacity="0.08">7</text>
+        <text x="200" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="120" fill="#e8d5b5" opacity="0.95">7</text>
+        <text x="200" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#9b9a95" letter-spacing="6">DAYS</text>
+        <!-- Tick marks circle -->
+        <circle cx="200" cy="175" r="150" fill="none" stroke="#EF9F27" stroke-width="0.5" opacity="0.15" stroke-dasharray="4 8"/>
+        <!-- Bottom info -->
+        <rect x="60" y="275" width="280" height="0.5" fill="#EF9F27" opacity="0.3"/>
+        <text x="200" y="305" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#c8b89a" letter-spacing="2">MUNICH · NOV 2025</text>
+        <text x="200" y="330" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#5a5957" letter-spacing="1">MEDIA PREVIEW EVENT</text>
+        <text x="200" y="368" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#5a5957" letter-spacing="2">#Countdown #BeyondBorders</text>
+      </svg>
+      <div class="ig-label">05 · 活动倒计时</div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--text3);margin-bottom:0.5rem">所有物料尺寸：1080×1080px · 格式适配 Instagram Feed · 主题统一 Beyond Borders</p>
+</div>
+
+<hr class="div">
+
+<!-- COPY SECTION -->
+<div class="section">
+  <div class="section-label">03 · PR通稿与KOL文案</div>
+  <h2 class="section-title">10+ 篇<em>传播文案</em></h2>
+  <p class="section-body">覆盖英/德/法三语，按媒体通稿、KOL种草、社媒文案三大类型分类呈现，可在下方直接生成更多定制文案。</p>
+
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab('pr')">PR 通稿</button>
+    <button class="tab-btn" onclick="switchTab('kol')">KOL 种草</button>
+    <button class="tab-btn" onclick="switchTab('social')">社媒文案</button>
+  </div>
+
+  <!-- PR -->
+  <div class="copy-panel active" id="panel-pr">
+    <div class="copy-list">
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-pr">PR 通稿</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">Press Release · European Launch Announcement</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">FOR IMMEDIATE RELEASE
+
+[Brand Name] Accelerates European Expansion with Munich Launch Event
+
+MUNICH, November 2025 — [Brand Name], China's leading new energy vehicle manufacturer, today announced the launch of its European market entry strategy at an exclusive media event in Munich, marking a significant milestone in the company's global expansion.
+
+The event, attended by over 50 automotive journalists and content creators from across Europe, showcased the brand's flagship electric sedan, engineered specifically for European driving conditions and regulatory requirements.
+
+"Europe is not just a market for us — it is a statement of intent," said [CEO Name], Chief Executive Officer. "We have invested four years in understanding European consumers, their infrastructure needs, and their values around sustainability. Today, we are ready."
+
+KEY HIGHLIGHTS:
+· European Type Approval (WVTA) certified across all major markets
+· 8-year / 160,000 km battery warranty — industry-leading commitment
+· Local data storage compliance with GDPR requirements
+· Service network of 200+ authorised centres across 12 countries by 2026
+
+The brand's European lineup will be available through a network of 50 showrooms across Germany, Netherlands, France, Norway, and the UK, with order books opening Q1 2026.
+
+For media enquiries: press@[brand].eu
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-pr">PR 通稿</span>
+            <span class="copy-tag ctag-de">DE</span>
+            <span class="copy-title">Pressemitteilung · Europäische Markteinführung</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">ZUR SOFORTIGEN VERÖFFENTLICHUNG
+
+[Markenname] setzt neuen Maßstab für Elektromobilität in Europa
+
+MÜNCHEN, November 2025 — [Markenname], Chinas führender Hersteller für Elektrofahrzeuge, präsentierte heute auf einem exklusiven Medienevent in München seine europäische Marktstrategie. Das Unternehmen unterstreicht damit seinen Anspruch, den europäischen Elektroautomarkt nachhaltig mitzugestalten.
+
+Vor über 50 internationalen Automobiljournalisten stellte die Marke ihre Flaggschiff-Limousine vor — entwickelt und zertifiziert für europäische Fahrbedingungen und Sicherheitsstandards.
+
+„Europa bedeutet für uns mehr als ein Absatzmarkt", erklärte [CEO Name]. „Es ist ein Bekenntnis zu europäischen Werten: Ingenieurskunst, Nachhaltigkeit und Verlässlichkeit. Wir sind bereit."
+
+WICHTIGE FAKTEN:
+· Europäische Typgenehmigung (WVTA) für alle Kernmärkte
+· 8 Jahre / 160.000 km Batteriegarantie — branchenweit führend
+· DSGVO-konforme lokale Datenspeicherung
+· 200+ autorisierte Servicepartner in 12 Ländern bis 2026
+
+Pressekontakt: presse@[marke].eu
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-pr">PR 通稿</span>
+            <span class="copy-tag ctag-fr">FR</span>
+            <span class="copy-title">Communiqué de presse · Lancement en Europe</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">COMMUNIQUÉ DE PRESSE — DIFFUSION IMMÉDIATE
+
+[Nom de marque] réinvente la mobilité électrique en Europe
+
+MUNICH, novembre 2025 — [Nom de marque], constructeur chinois de référence dans le domaine des véhicules électriques, a dévoilé aujourd'hui sa stratégie d'entrée sur le marché européen lors d'un événement médiatique exclusif à Munich. Cette annonce marque une étape décisive dans le développement international du groupe.
+
+En présence de plus de 50 journalistes automobiles européens, la marque a présenté sa berline phare — conçue et homologuée pour les exigences spécifiques du marché européen.
+
+« L'Europe n'est pas seulement un marché, c'est une ambition », a déclaré [Prénom Nom du PDG]. « Nous avons pris le temps de comprendre les attentes des consommateurs européens : leur goût pour le design, leur exigence en matière de sécurité et leur engagement envers la transition écologique. »
+
+POINTS CLÉS :
+· Homologation européenne WVTA dans tous les marchés principaux
+· Garantie batterie 8 ans / 160 000 km — référence du secteur
+· Stockage local des données conforme au RGPD
+· Plus de 200 centres de service agréés dans 12 pays d'ici 2026
+
+Contact presse : presse@[marque].eu
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-pr">PR 通稿</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">Media Drive Review · Post-Event Release</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">MEDIA DRIVE RESULTS — FOR IMMEDIATE RELEASE
+
+European Media Give Verdict: "[Brand Name] Exceeds Expectations on Autobahn"
+
+Following an exclusive media drive event across Munich's scenic countryside routes and a stretch of unrestricted Autobahn, automotive press across Europe has delivered an overwhelmingly positive assessment of [Brand Name]'s European debut model.
+
+DRIVE HIGHLIGHTS REPORTED BY MEDIA:
+· 0–100 km/h in 3.8 seconds — "genuinely fast, with composure" (Auto Motor und Sport)
+· Real-world range of 487 km achieved under mixed driving conditions
+· XNGP autonomous driving system described as "among the most confident we've tested in Europe"
+· Interior quality rated "comparable to German premium segment" by three independent reviewers
+
+The brand's head of European engineering confirmed that suspension tuning was specifically recalibrated for European road surfaces, a detail noted positively by multiple publications.
+
+Orders open: [brand].eu/configure
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KOL -->
+  <div class="copy-panel" id="panel-kol">
+    <div class="copy-list">
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-kol">KOL 种草</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">EV Lifestyle Blogger · Instagram Caption</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">Spent three days driving the new [Brand Name] across Bavaria and I genuinely didn't want to give the keys back. 🚗⚡
+
+What surprised me most wasn't the range (though 480+ km real-world is impressive). It was the *confidence* the car gives you on the motorway. Solid, quiet, planted.
+
+The interior is where they've really raised the bar — the 15.6" display is buttery smooth, but more importantly, the physical controls for temperature and volume are still there. They listened.
+
+A few things I want to see improved: the charging network partnership in rural Germany could be stronger, and the app needs a reliability update.
+
+But overall? This is the first Chinese EV I've recommended to friends without hesitation.
+
+Full review in bio link. Not sponsored — just genuinely impressed.
+
+#ElectricCar #EVReview #BeyondBorders #SustainableDriving #ChineseEV #EuropeEV
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-kol">KOL 种草</span>
+            <span class="copy-tag ctag-de">DE</span>
+            <span class="copy-title">Nachhaltigkeits-Creator · Instagram Caption</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">Ich wurde eingeladen, den neuen [Markenname] auf einer Presseveranstaltung in München zu fahren — und ich muss ehrlich sein: Meine Erwartungen waren gemischt. 🤔
+
+Drei Stunden später hatte ich meine Meinung geändert.
+
+Was mich überzeugt hat: Die Reichweite von über 480 km im Realbetrieb. Das Interieur, das qualitativ auf Augenhöhe mit deutschen Premiummarken ist. Und die Tatsache, dass die Daten in Europa gespeichert werden — das war mir wichtig.
+
+Was noch besser werden könnte: Das Ladenetzwerk in ländlichen Gebieten Deutschlands braucht Ausbau. Und die App-Stabilität muss verbessert werden.
+
+Mein Fazit: Für alle, die ein Elektroauto suchen, das Reichweite, Technologie und einen fairen Preis kombiniert — dieser hier verdient eine ehrliche Probefahrt.
+
+Vollständigen Test findet ihr über den Link in meiner Bio. Kein bezahlter Content.
+
+#Elektroauto #Nachhaltigkeit #EVTest #BeyondBorders #GrünerFahren
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-kol">KOL 种草</span>
+            <span class="copy-tag ctag-fr">FR</span>
+            <span class="copy-title">Créateur mobilité durable · Caption Instagram</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">J'ai eu la chance d'essayer la nouvelle [Nom de marque] lors de l'événement de lancement européen à Munich. Voici mon retour honnête. 🌿⚡
+
+Ce qui m'a vraiment séduite : l'autonomie réelle de 480+ km (testée sur autoroute ET en ville), le niveau de finition intérieure — franchement bluffant pour ce prix — et l'engagement de la marque sur la donnée : stockage RGPD, en Europe. Pour moi, c'est non négociable.
+
+Ce que j'aurais aimé voir : un réseau de charge partenaire plus dense en France rurale, et une meilleure intégration avec les applis de navigation européennes.
+
+Mon verdict : c'est la première voiture électrique chinoise que je recommanderais à ma famille. Sans hésitation.
+
+Lien vers le test complet en bio. Contenu non sponsorisé — juste mon avis sincère.
+
+#VoitureÉlectrique #MobilitéDurable #TestAuto #BeyondBorders #EVFrance
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-kol">KOL 种草</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">Tech YouTuber · Video Description</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">I drove the [Brand Name] for 3 days across Germany. Here's what the specs don't tell you.
+
+In this video:
+00:00 – Why I was skeptical
+02:30 – The drive: Autobahn, city, countryside
+08:45 – Interior deep dive (and what surprised me)
+14:20 – Software & OTA: honest assessment
+19:00 – Charging experience in Germany
+23:15 – Data privacy: what actually happens to your data
+27:40 – Price vs. competition: is it worth it?
+32:00 – Final verdict
+
+TLDR: Better than I expected. Not perfect. Genuinely competitive.
+
+The autonomy software (XNGP equivalent for Europe) is the most impressive thing in this car. The charging partnership needs work. The price makes Tesla nervous.
+
+Full written review: [link]
+Enquiries: [email]
+
+This video was filmed at an invited media event. I received no payment. All opinions are my own.
+
+#EVReview #ChineseEV #ElectricCar #TechReview #BeyondBorders
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="copy-panel" id="panel-social">
+    <div class="copy-list">
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-social">社媒文案</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">Brand IG · Launch Announcement Post</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">Europe, we're here. ⚡
+
+After four years of engineering, testing, and listening — we're finally ready to introduce ourselves to the roads that defined automotive history.
+
+The [Model Name]. Built for Europe. Certified for Europe. Designed to move Europe.
+
+🔋 500km real-world range
+⚡ 22-minute rapid charge (10–80%)
+🛡️ 8-year battery warranty
+🌍 Data stored locally, in Europe
+
+Pre-registration opens today. Link in bio.
+
+#BeyondBorders #EuropeEV #ElectricFuture #[BrandName]Europe
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-social">社媒文案</span>
+            <span class="copy-tag ctag-en">EN</span>
+            <span class="copy-title">Brand IG · Sustainability Story Series (×3)</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">— STORY 1 / 3 —
+"The battery in your [Model Name] will outlast most cars on the road today."
+8-year warranty. 160,000 km guaranteed. That's our commitment.
+#ZeroCompromise
+
+— STORY 2 / 3 —
+Every [Model Name] sold in Europe is charged on 100% renewable energy during delivery.
+From factory to your driveway — already green.
+#GreenFromTheStart
+
+— STORY 3 / 3 —
+Your data stays in Europe.
+GDPR-compliant local servers. No exceptions.
+Because privacy isn't a feature — it's a right.
+#DataSecurity #TrustFirst
+        </div>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-card-header">
+          <div class="copy-card-meta">
+            <span class="copy-tag ctag-social">社媒文案</span>
+            <span class="copy-tag ctag-de">DE</span>
+            <span class="copy-title">Brand IG DE · Produktvorstellung Post</span>
+          </div>
+          <div class="copy-actions">
+            <button class="action-btn" onclick="toggleCopy(this)"><i class="ti ti-chevron-down" aria-hidden="true"></i> 展开</button>
+            <button class="action-btn" onclick="copyText(this)"><i class="ti ti-copy" aria-hidden="true"></i> 复制</button>
+          </div>
+        </div>
+        <div class="copy-body collapsed">Deutschland, wir sind da. ⚡
+
+Vier Jahre Entwicklung, Testen und Zuhören — jetzt sind wir bereit, uns auf den Straßen vorzustellen, die Automobilgeschichte geschrieben haben.
+
+Der [Modellname]. Für Europa entwickelt. In Europa zertifiziert. Für Europa gebaut.
+
+🔋 500 km Realreichweite
+⚡ 22 Minuten Schnellladen (10–80 %)
+🛡️ 8 Jahre Batteriegarantie
+🌍 Datenspeicherung in Europa — DSGVO-konform
+
+Vorregistrierung jetzt offen. Link in Bio.
+
+#BeyondBorders #Elektroauto #ElektrischeFahren #[MarkenName]Deutschland
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI GEN BOX -->
+  <div class="gen-box">
+    <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:8px">
+      <i class="ti ti-sparkles" aria-hidden="true" style="font-size:15px;color:var(--text3)"></i>
+      生成更多文案
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:12px">选择类型和市场，输入关键诉求，生成定制文案</div>
+    <div class="gen-row">
+      <select class="gen-select" id="gen-type">
+        <option value="PR通稿">PR 通稿</option>
+        <option value="KOL种草文案">KOL 种草</option>
+        <option value="Instagram品牌文案">Instagram 品牌文案</option>
+        <option value="媒体试驾邀请函">媒体邀请函</option>
+      </select>
+      <select class="gen-select" id="gen-lang">
+        <option value="英文">英文</option>
+        <option value="德文">德文</option>
+        <option value="法文">法文</option>
+        <option value="中英双语">中英双语</option>
+      </select>
+      <input class="gen-input" id="gen-brief" placeholder="输入核心诉求，如：强调数据安全和GDPR合规，面向德国科技媒体">
+      <button class="gen-btn" id="gen-btn" onclick="generateCopy()">
+        <i class="ti ti-wand" aria-hidden="true"></i> 生成
+      </button>
+    </div>
+    <div class="gen-thinking" id="gen-thinking">
+      <i class="ti ti-pencil" aria-hidden="true" style="font-size:14px"></i>
+      正在创作文案...
+      <span class="dots"><span></span><span></span><span></span></span>
+    </div>
+    <div class="gen-result" id="gen-result"></div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', ['pr','kol','social'][i]===t)
+  });
+  document.querySelectorAll('.copy-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+t).classList.add('active');
+}
+
+function toggleCopy(btn){
+  const body = btn.closest('.copy-card').querySelector('.copy-body');
+  const collapsed = body.classList.toggle('collapsed');
+  btn.innerHTML = collapsed
+    ? '<i class="ti ti-chevron-down" aria-hidden="true"></i> 展开'
+    : '<i class="ti ti-chevron-up" aria-hidden="true"></i> 收起';
+}
+
+function copyText(btn){
+  const text = btn.closest('.copy-card').querySelector('.copy-body').innerText;
+  navigator.clipboard.writeText(text);
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> 已复制';
+  setTimeout(()=>{btn.innerHTML=orig},2000);
+}
+
+const COPY_SYSTEM = `你是一位专注于欧洲市场的汽车品牌传播专家，精通中国新能源汽车品牌的国际化营销。你需要根据用户要求，生成符合欧洲当地语境的传播文案。
+
+要求：
+1. 文案风格：专业但不失温度，避免中式表达直译，符合目标语言的表达习惯
+2. 核心信息：数据安全（GDPR合规）、电池质保、真实续航、可持续承诺
+3. 避免夸张承诺，用事实说话
+4. 结尾附上3-5个相关话题标签
+5. 直接输出文案内容，不需要前言解释`;
+
+async function generateCopy(){
+  const type = document.getElementById('gen-type').value;
+  const lang = document.getElementById('gen-lang').value;
+  const brief = document.getElementById('gen-brief').value.trim();
+  if(!brief){document.getElementById('gen-brief').focus();return;}
+
+  const btn = document.getElementById('gen-btn');
+  const thinking = document.getElementById('gen-thinking');
+  const result = document.getElementById('gen-result');
+  btn.disabled=true;
+  thinking.classList.add('show');
+  result.classList.remove('show');
+
+  const prompt = `请生成一篇${lang}版本的${type}。\n核心诉求：${brief}\n\n直接输出文案正文，不需要任何前言或说明。`;
+
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:COPY_SYSTEM,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.map(b=>b.text||'').join('')||'生成失败，请重试。';
+    thinking.classList.remove('show');
+    result.textContent = text;
+    result.classList.add('show');
+  }catch(e){
+    thinking.classList.remove('show');
+    result.textContent = '连接失败，请检查网络后重试。';
+    result.classList.add('show');
+  }
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>

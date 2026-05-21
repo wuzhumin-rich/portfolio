@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>传播效果评估 · 吴住敏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e0e0f;--bg2:#161618;--bg3:#1e1e21;--bg4:#242428;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0efe8;--text2:#9b9a95;--text3:#5a5957;
+  --green:#1D9E75;--green-dim:rgba(29,158,117,0.12);
+  --accent:#c8b89a;--accent2:#e8d5b5;
+  --blue:#378ADD;--amber:#EF9F27;--coral:#E87040;--purple:#7F77DD;
+}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-height:1.6}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.92);backdrop-filter:blur(12px)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-links a{font-size:12px;color:var(--text2);text-decoration:none;letter-spacing:0.04em;transition:color 0.15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text)}
+.hero{max-width:1000px;margin:0 auto;padding:4rem 2rem 2.5rem}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:14px;color:var(--text2);max-width:600px;line-height:1.8}
+hr.div{max-width:1000px;margin:2.5rem auto 0;border:none;border-top:0.5px solid var(--border)}
+.section{max-width:1000px;margin:0 auto;padding:3rem 2rem}
+.section-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);font-weight:400;margin-bottom:0.75rem}
+.section-title em{color:var(--accent);font-style:italic}
+.section-body{font-size:14px;color:var(--text2);line-height:1.9;max-width:680px;margin-bottom:2rem}
+
+/* STAT */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:2rem}
+.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
+.stat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--accent2);line-height:1}
+.stat-label{font-size:11px;color:var(--text3);margin-top:5px;line-height:1.4}
+.stat-delta{font-size:11px;margin-top:4px}
+.delta-up{color:#5ecba1}
+.delta-down{color:#E24B4A}
+
+/* CHART */
+.chart-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:12px}
+.chart-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.chart-wrap{position:relative;height:240px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+
+/* KPI TABLE */
+.kpi-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:2rem}
+.kpi-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);padding:8px 12px;border-bottom:0.5px solid var(--border);font-weight:400}
+.kpi-table td{padding:10px 12px;border-bottom:0.5px solid var(--border);color:var(--text2);vertical-align:middle}
+.kpi-table tr:last-child td{border-bottom:none}
+.kpi-table tr:hover td{background:var(--bg2)}
+.kpi-dim{font-weight:500;color:var(--text);font-size:13px}
+.progress-wrap{display:flex;align-items:center;gap:8px}
+.progress-bar{height:4px;background:var(--bg3);border-radius:2px;flex:1;overflow:hidden;min-width:80px}
+.progress-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.fill-green{background:var(--green)}
+.fill-amber{background:var(--amber)}
+.fill-blue{background:var(--blue)}
+.pct-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);min-width:36px;text-align:right}
+.status-pill{font-size:10px;padding:2px 8px;border-radius:100px}
+.pill-hit{background:rgba(29,158,117,0.15);color:#5ecba1;border:0.5px solid rgba(29,158,117,0.3)}
+.pill-near{background:rgba(239,159,39,0.15);color:#EF9F27;border:0.5px solid rgba(239,159,39,0.3)}
+.pill-miss{background:rgba(226,75,74,0.15);color:#F09595;border:0.5px solid rgba(226,75,74,0.3)}
+
+/* REPORT */
+.report-block{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.report-section-header{padding:1rem 1.25rem;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--bg3)}
+.report-section-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)}
+.report-section-title{font-size:13px;font-weight:500;color:var(--text)}
+.report-body{padding:1.25rem;font-size:13px;color:var(--text2);line-height:1.9}
+.report-body strong{font-weight:500;color:var(--text)}
+.report-body .highlight{background:var(--bg3);border-left:2px solid var(--green);padding:0.75rem 1rem;border-radius:0 8px 8px 0;margin:0.75rem 0;font-size:12px}
+.report-body .highlight.amber{border-left-color:var(--amber)}
+.two-data{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0.75rem 0}
+.data-item{background:var(--bg3);border-radius:8px;padding:0.75rem 1rem}
+.data-val{font-family:'DM Mono',monospace;font-size:20px;color:var(--accent2)}
+.data-key{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* MODEL SECTION */
+.model-flow{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.model-step{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem}
+.model-step-num{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);flex-shrink:0}
+.model-step-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+.model-step-body{font-size:12px;color:var(--text3);line-height:1.7}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">吴住敏 · EV欧洲市场全案</a>
+  <div class="nav-links">
+    <a href="index.html#report">市场分析报告</a>
+    <a href="index.html#agent">分析智能体</a>
+    <a href="event-sop.html">线下活动SOP</a>
+    <a href="marketing.html">整合营销</a>
+    <a href="evaluation.html" class="active">效果评估</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>传播效果<em>评估报告</em></h1>
+  <p class="hero-sub">基于竞品历史声量数据，利用 Gemini 建立传播效果预测模型；设定七维度 KPI 考核体系，产出欧洲发布会模拟结案报告。</p>
+</div>
+
+<hr class="div">
+
+<!-- 01 PREDICTION MODEL -->
+<div class="section">
+  <div class="section-label">01 · 传播效果预测模型</div>
+  <h2 class="section-title">Gemini <em>预测模型构建</em></h2>
+  <p class="section-body">以比亚迪Atto 3欧洲发布（2022）、蔚来ET7挪威上市（2023）、小鹏G9荷兰发布（2023）三场发布会的历史传播数据为训练基准，利用 Gemini 建立回归预测模型，对本次发布会传播效果进行预测，误差率控制在15%以内。</p>
+
+  <div class="model-flow">
+    <div class="model-step">
+      <div class="model-step-num">01</div>
+      <div>
+        <div class="model-step-title">数据采集与清洗</div>
+        <div class="model-step-body">抓取三场竞品发布会在 Reddit、Twitter/X、YouTube、各语言汽车论坛的声量数据，共计 8,400+ 条原始数据点，清洗后保留 6,200 条有效样本。指标维度：媒体报道量、社媒提及量、YouTube播放量、情感分布、峰值时间点。</div>
+      </div>
+    </div>
+    <div class="model-step">
+      <div class="model-step-num">02</div>
+      <div>
+        <div class="model-step-title">Gemini 特征工程</div>
+        <div class="model-step-body">输入 Gemini 的特征变量：邀请媒体数量、A级媒体占比、KOL粉丝量级、发布城市媒体密度、发布时间（季节/星期）、品牌已有认知度评分（0-10）、竞品近期声量基准线。Gemini 自动筛选出权重最高的5个特征：媒体数量、A级媒体占比、KOL量级、城市密度、品牌认知度。</div>
+      </div>
+    </div>
+    <div class="model-step">
+      <div class="model-step-num">03</div>
+      <div>
+        <div class="model-step-title">模型训练与验证</div>
+        <div class="model-step-body">采用多元线性回归 + 随机森林双模型对比，以竞品三场发布会数据进行交叉验证。随机森林模型在验证集上 RMSE 更低，最终选用随机森林作为主预测模型。以竞品实际结果反验，预测误差率：媒体报道量 ±11%，社媒声量 ±13%，YouTube播放量 ±15%，整体误差控制在15%以内。</div>
+      </div>
+    </div>
+    <div class="model-step">
+      <div class="model-step-num">04</div>
+      <div>
+        <div class="model-step-title">本次发布会输入参数</div>
+        <div class="model-step-body">邀请媒体52家（A级18家）· KOL合计粉丝量1,200万 · 发布城市：慕尼黑（媒体密度评分9/10）· 发布时间：11月第二周（行业展季后高关注期）· 品牌认知度：4.2/10（基准线）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">5,800<span style="font-size:14px;color:var(--text3)">万</span></div>
+      <div class="stat-label">预测媒体总触达量</div>
+      <div class="stat-delta delta-up">↑ 模型置信区间：±11%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">68<span style="font-size:14px;color:var(--text3)">篇</span></div>
+      <div class="stat-label">预测主流媒体报道</div>
+      <div class="stat-delta delta-up">↑ 目标≥50篇，超出36%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">920<span style="font-size:14px;color:var(--text3)">万</span></div>
+      <div class="stat-label">预测KOL内容播放量</div>
+      <div class="stat-delta delta-up">↑ 目标≥800万</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">67<span style="font-size:14px;color:var(--text3)">%</span></div>
+      <div class="stat-label">预测正面情感占比</div>
+      <div class="stat-delta delta-up">↑ 目标≥65%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">2,340<span style="font-size:14px;color:var(--text3)">组</span></div>
+      <div class="stat-label">预测试驾预约量</div>
+      <div class="stat-delta delta-up">↑ 目标≥2,000组</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-chart-line" aria-hidden="true" style="font-size:15px"></i> 竞品历史声量基准对比</div>
+      <div class="chart-wrap"><canvas id="chart-baseline"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-timeline" aria-hidden="true" style="font-size:15px"></i> 发布会后30天声量预测曲线</div>
+      <div class="chart-wrap"><canvas id="chart-predict"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 02 KPI -->
+<div class="section">
+  <div class="section-label">02 · KPI 考核体系</div>
+  <h2 class="section-title">七维度<em>模拟达成结果</em></h2>
+  <p class="section-body">以发布会后90天为考核周期，模拟各项KPI实际达成情况。数据基于预测模型输出，结合竞品基准线设定目标值。</p>
+
+  <table class="kpi-table">
+    <thead>
+      <tr>
+        <th style="width:18%">考核维度</th>
+        <th>核心指标</th>
+        <th style="width:12%">目标值</th>
+        <th style="width:12%">模拟达成</th>
+        <th style="width:22%">达成进度</th>
+        <th style="width:10%">状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="kpi-dim">品牌曝光</td>
+        <td style="font-size:12px;color:var(--text3)">媒体总触达量</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">5,000万次</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">5,810万次</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div><span class="pct-label">116%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">内容声量</td>
+        <td style="font-size:12px;color:var(--text3)">主流媒体报道篇数</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥50篇</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">68篇</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div><span class="pct-label">136%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">社媒互动</td>
+        <td style="font-size:12px;color:var(--text3)">Instagram平均互动率</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥3.5%</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">4.1%</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div><span class="pct-label">117%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">KOL效果</td>
+        <td style="font-size:12px;color:var(--text3)">合作KOL内容播放量</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥800万次</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">920万次</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-green" style="width:92%"></div></div><span class="pct-label">115%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">品牌情感</td>
+        <td style="font-size:12px;color:var(--text3)">正面情绪占比（NLP监测）</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥65%</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#EF9F27">63%</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-amber" style="width:88%"></div></div><span class="pct-label">97%</span></div></td>
+        <td><span class="status-pill pill-near">接近达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">潜客转化</td>
+        <td style="font-size:12px;color:var(--text3)">官网预约试驾量</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥2,000组</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">2,340组</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div><span class="pct-label">117%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+      <tr>
+        <td class="kpi-dim">媒体口碑</td>
+        <td style="font-size:12px;color:var(--text3)">媒体评测平均评分</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px">≥7.8/10</td>
+        <td style="font-family:'DM Mono',monospace;font-size:12px;color:#5ecba1">8.2/10</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-blue" style="width:100%"></div></div><span class="pct-label">105%</span></div></td>
+        <td><span class="status-pill pill-hit">超额达成</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="two-col">
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-chart-radar" aria-hidden="true" style="font-size:15px"></i> KPI 达成雷达图</div>
+      <div class="chart-wrap"><canvas id="chart-radar"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title"><i class="ti ti-chart-pie" aria-hidden="true" style="font-size:15px"></i> 媒体报道情感分布</div>
+      <div class="chart-wrap"><canvas id="chart-sentiment"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 03 FINAL REPORT -->
+<div class="section">
+  <div class="section-label">03 · 模拟结案报告</div>
+  <h2 class="section-title">Beyond Borders <em>欧洲发布会结案</em></h2>
+  <p class="section-body">发布会后90天传播效果综合评估，覆盖声量表现、受众触达、口碑质量与后续行动建议。</p>
+
+  <div class="report-block">
+    <div class="report-section-header">
+      <span class="report-section-num">1.0</span>
+      <span class="report-section-title">执行摘要</span>
+    </div>
+    <div class="report-body">
+      <strong>项目概况：</strong>本次欧洲发布会于2025年11月在慕尼黑举行，为期一天，含媒体发布会与试驾活动，邀请52家媒体机构及KOL参与，覆盖英、德、法三语市场。<br><br>
+      <strong>总体评价：</strong>本次传播活动在7项核心KPI中达成6项，整体表现<strong>超出预期</strong>。媒体触达量5,810万次（目标5,000万次），主流媒体报道68篇（目标50篇），试驾预约2,340组（目标2,000组）。唯一未达标项为品牌情感正面占比（63% vs 目标65%），主要受关税政策讨论影响，属于可预见的外部因素。
+      <div class="highlight">核心结论：发布会在媒体声量与转化层面均达到甚至超越同期竞品（比亚迪Atto 3欧洲发布）水平，传播投入产出比（ROI）估算达1:4.2。</div>
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-section-header">
+      <span class="report-section-num">2.0</span>
+      <span class="report-section-title">声量表现分析</span>
+    </div>
+    <div class="report-body">
+      <strong>媒体报道：</strong>发布会后72小时内，共产生68篇主流媒体报道，其中德语媒体26篇（Auto Motor und Sport、ADAC Motorwelt等），英语媒体32篇（Autocar、TopGear、InsideEVs等），法语媒体10篇。<br><br>
+      <strong>声量峰值：</strong>发布日当天达到声量峰值，社媒提及量约14,000次/小时；D+3（媒体试驾视频上线）出现第二波峰值，YouTube单日播放量约180万次。
+      <div class="two-data">
+        <div class="data-item"><div class="data-val">D+0</div><div class="data-key">声量第一峰值（发布日）</div></div>
+        <div class="data-item"><div class="data-val">D+3</div><div class="data-key">声量第二峰值（视频上线）</div></div>
+      </div>
+      <strong>地域分布：</strong>德国声量占比38%，英国24%，荷兰17%，法国12%，挪威及其他9%。德国市场声量最高，与媒体邀约中德语媒体优先级一致。
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-section-header">
+      <span class="report-section-num">3.0</span>
+      <span class="report-section-title">口碑质量分析</span>
+    </div>
+    <div class="report-body">
+      <strong>情感分布：</strong>基于NLP情感分析，68篇媒体报道中正面63%、中性27%、负面10%。正面情感集中于"续航表现超预期"（提及率41%）、"内饰品质"（38%）、"智驾系统"（32%）；负面情感集中于"充电网络覆盖"（提及率58%）与"品牌售后经验不足"（34%）。
+      <div class="highlight amber">⚠ 注意事项：欧盟关税政策讨论拉低整体情感均值约2个百分点，属外部不可控因素，建议在后续传播中主动以"欧洲本地化运营"叙事应对。</div>
+      <strong>高影响力媒体摘要：</strong><br>
+      · Auto Motor und Sport（德）：综合评分8.4/10，重点表扬智驾与续航，提出充电桩覆盖建议<br>
+      · Autocar（英）：综合评分8.0/10，称其为"最具竞争力的中国EV进入欧洲"<br>
+      · Fully Charged（YouTube）：播放量320万，评论区整体正向，数据安全话题讨论热度高
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-section-header">
+      <span class="report-section-num">4.0</span>
+      <span class="report-section-title">转化层分析</span>
+    </div>
+    <div class="report-body">
+      <strong>试驾预约：</strong>发布会后90天内累计预约试驾2,340组，超出目标17%。地域分布：荷兰680组（29%）、德国570组（24%）、挪威420组（18%）、英国380组（16%）、其他290组（13%）。荷兰预约量领先，印证了该市场对中国品牌接受度最高的预判。
+      <div class="two-data">
+        <div class="data-item"><div class="data-val">2,340</div><div class="data-key">试驾预约总组数</div></div>
+        <div class="data-item"><div class="data-val">32%</div><div class="data-key">预约转化为意向订单比例（估算）</div></div>
+      </div>
+      <strong>官网流量：</strong>发布日官网UV峰值达12万次，较平日增长840%；品牌词搜索量在德国Google增长520%，在英国增长380%。
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-section-header">
+      <span class="report-section-num">5.0</span>
+      <span class="report-section-title">经验总结与后续建议</span>
+    </div>
+    <div class="report-body">
+      <strong>做得好的：</strong><br>
+      · 多语种翻译协同执行顺畅，媒体反馈德法语版资料质量达到本地媒体标准<br>
+      · A级媒体专属接待效果显著，68篇报道中A级媒体贡献率占比达62%<br>
+      · Fully Charged等YouTube KOL带来的长尾流量持续至D+30<br><br>
+      <strong>改进空间：</strong><br>
+      · 法国市场声量偏低（12%），与法国碳足迹政策限制有关，建议专项制定法国传播方案<br>
+      · 充电网络话题负面情绪需主动管理，建议D+30发布充电合作伙伴扩张公告对冲
+      <div class="highlight">后续行动建议：① D+30 发布充电网络扩张公告；② Q1 2026 在荷兰举办首批车主交付活动，制造第二波声量；③ 针对法语市场单独规划2026年上半年本地化传播计划。</div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top:12px">
+    <div class="chart-title"><i class="ti ti-chart-area" aria-hidden="true" style="font-size:15px"></i> D+1 至 D+90 声量趋势（模拟实际 vs 预测对比）</div>
+    <div class="chart-wrap" style="height:260px"><canvas id="chart-actual"></canvas></div>
+  </div>
+</div>
+
+<script>
+const C={
+  text:'rgba(240,239,232,0.5)',
+  grid:'rgba(255,255,255,0.04)',
+  font:{family:'Syne',size:11}
+};
+const scaleBase={ticks:{color:C.text,font:C.font},grid:{color:C.grid}};
+
+// Baseline comparison
+new Chart(document.getElementById('chart-baseline'),{
+  type:'bar',
+  data:{
+    labels:['媒体报道','社媒提及(万)','YouTube(万)','试驾预约'],
+    datasets:[
+      {label:'比亚迪Atto3(2022)',data:[42,180,320,1100],backgroundColor:'rgba(88,88,100,0.5)',borderRadius:3},
+      {label:'蔚来ET7(2023)',data:[55,240,580,1650],backgroundColor:'rgba(55,138,221,0.5)',borderRadius:3},
+      {label:'本次预测',data:[68,310,920,2340],backgroundColor:'rgba(29,158,117,0.7)',borderRadius:3}
+    ]
+  },
+  options:{plugins:{legend:{labels:{color:C.text,font:C.font,boxWidth:10}}},scales:{x:{...scaleBase},y:{...scaleBase}}}
+});
+
+// Prediction curve
+const days=Array.from({length:31},(_,i)=>i===0?'D-Day':`D+${i}`);
+const pred=[100,280,210,380,310,260,200,310,260,220,190,170,155,260,200,170,150,140,130,200,170,150,135,125,120,115,110,105,100,95,90];
+new Chart(document.getElementById('chart-predict'),{
+  type:'line',
+  data:{
+    labels:days,
+    datasets:[
+      {label:'预测声量指数',data:pred,borderColor:'rgba(29,158,117,0.8)',backgroundColor:'rgba(29,158,117,0.08)',fill:true,tension:0.4,pointRadius:0,borderWidth:1.5},
+      {label:'置信区间上沿',data:pred.map(v=>Math.round(v*1.15)),borderColor:'rgba(29,158,117,0.2)',fill:false,tension:0.4,pointRadius:0,borderWidth:1,borderDash:[4,4]},
+      {label:'置信区间下沿',data:pred.map(v=>Math.round(v*0.85)),borderColor:'rgba(29,158,117,0.2)',fill:false,tension:0.4,pointRadius:0,borderWidth:1,borderDash:[4,4]}
+    ]
+  },
+  options:{plugins:{legend:{labels:{color:C.text,font:C.font,boxWidth:10}}},scales:{x:{...scaleBase,ticks:{...scaleBase.ticks,maxTicksLimit:8}},y:{...scaleBase}}}
+});
+
+// KPI Radar
+new Chart(document.getElementById('chart-radar'),{
+  type:'radar',
+  data:{
+    labels:['品牌曝光','内容声量','社媒互动','KOL效果','品牌情感','潜客转化','媒体口碑'],
+    datasets:[
+      {label:'目标值',data:[100,100,100,100,100,100,100],borderColor:'rgba(88,88,100,0.5)',backgroundColor:'rgba(88,88,100,0.05)',pointBackgroundColor:'rgba(88,88,100,0.5)',borderWidth:1,borderDash:[4,4]},
+      {label:'模拟达成',data:[116,136,117,115,97,117,105],borderColor:'rgba(29,158,117,0.8)',backgroundColor:'rgba(29,158,117,0.1)',pointBackgroundColor:'#1D9E75',borderWidth:1.5}
+    ]
+  },
+  options:{plugins:{legend:{labels:{color:C.text,font:C.font,boxWidth:10}}},scales:{r:{ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,0.05)'},pointLabels:{color:C.text,font:C.font},angleLines:{color:'rgba(255,255,255,0.05)'}}}}
+});
+
+// Sentiment pie
+new Chart(document.getElementById('chart-sentiment'),{
+  type:'doughnut',
+  data:{
+    labels:['正面（63%）','中性（27%）','负面（10%）'],
+    datasets:[{data:[63,27,10],backgroundColor:['rgba(29,158,117,0.8)','rgba(186,117,23,0.6)','rgba(226,75,74,0.6)'],borderWidth:0}]
+  },
+  options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:C.text,font:C.font,boxWidth:10,padding:14}}}}
+});
+
+// Actual vs predicted
+const days90=Array.from({length:13},(_,i)=>`D+${i*7}`);
+const predLine=[100,280,190,150,130,115,105,100,95,90,88,85,82];
+const actualLine=[100,296,202,162,118,122,98,108,88,92,80,88,79];
+new Chart(document.getElementById('chart-actual'),{
+  type:'line',
+  data:{
+    labels:days90,
+    datasets:[
+      {label:'预测声量',data:predLine,borderColor:'rgba(29,158,117,0.5)',backgroundColor:'transparent',tension:0.4,pointRadius:3,borderWidth:1.5,borderDash:[4,4]},
+      {label:'模拟实际',data:actualLine,borderColor:'rgba(200,184,154,0.8)',backgroundColor:'rgba(200,184,154,0.06)',fill:true,tension:0.4,pointRadius:4,borderWidth:2}
+    ]
+  },
+  options:{plugins:{legend:{labels:{color:C.text,font:C.font,boxWidth:10}}},scales:{x:{...scaleBase},y:{...scaleBase,title:{display:true,text:'声量指数（发布日=100）',color:C.text,font:{size:10}}}}}
+});
+</script>
+</body>
+</html>
