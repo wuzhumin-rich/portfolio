@@ -21,8 +21,9 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;line-h
 
 nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(14,14,15,0.92);backdrop-filter:blur(12px)}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none}
-.nav-back{font-size:12px;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.15s}
-.nav-back:hover{color:var(--text2)}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-links a{font-size:12px;color:var(--text2);text-decoration:none;letter-spacing:0.04em;transition:color 0.15s}
+.nav-links a:hover{color:var(--text)}
 .nav-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);display:inline-block}
 
 .hero{max-width:1000px;margin:0 auto;padding:4rem 2rem 2.5rem}
@@ -139,26 +140,21 @@ footer a{color:var(--text2);text-decoration:none}
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">← 返回作品集主页</a>
-  <div style="display:flex;align-items:center;gap:8px">
-    <span class="nav-dot"></span>
-    <span style="font-size:12px;color:var(--text3)">线下活动 SOP</span>
+  <a class="nav-logo" href="index.html">吴住敏 · EV欧洲市场全案</a>
+  <div class="nav-links">
+    <a href="index.html#report">市场分析报告</a>
+    <a href="index.html#agent">分析智能体</a>
+    <a href="event-sop.html" style="color:var(--text)">线下活动SOP</a>
+    <a href="#" style="opacity:0.4;cursor:default">整合营销</a>
+    <a href="#" style="opacity:0.4;cursor:default">效果评估</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="eyebrow"><span class="nav-dot"></span> 全球传播课程成果 · 第二模块</div>
   <h1>海外新能源发布会<br><em>项目执行 SOP</em></h1>
   <p class="hero-sub">模拟策划国内头部新能源汽车品牌欧洲首站线下发布会及媒体试驾活动，覆盖12个核心执行节点，包含媒体邀约、多语种翻译协同、物料分发全流程规范。</p>
-  <div class="hero-tags">
-    <span class="tag tag-amber">发布会策划</span>
-    <span class="tag">媒体试驾</span>
-    <span class="tag">项目SOP</span>
-    <span class="tag">多语种协同</span>
-    <span class="tag">12个执行节点</span>
   </div>
-</div>
 
 <!-- STATS -->
 <div class="stat-row">
@@ -687,10 +683,7 @@ footer a{color:var(--text2);text-decoration:none}
   </div>
 </div>
 
-<footer>
-  <p>吴住敏 · 上海交通大学翻译硕士 · 全球传播课程成果</p>
-  <p style="margin-top:6px"><a href="index.html">← 返回作品集主页</a> · <a href="mailto:1875812956@qq.com">1875812956@qq.com</a></p>
-</footer>
+
 
 <script>
 function toggleNode(card){
